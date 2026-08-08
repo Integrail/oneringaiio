@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="why-callout">
-                        <strong>OneRingAI 1.0:</strong> Node.js 22+, 88 text/realtime registry records, dedicated image/video/voice/embedding registries, current OpenAI/Anthropic/Google/xAI APIs, and 6,327 passing unit tests. Read the <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#upgrading-to-100">upgrade guide</a>, <a href="https://github.com/aantich/oneringai/blob/main/docs/MODEL_REGISTRY_AUDIT.md">model audit</a>, or <a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#100--2026-08-08">release notes</a>.
+                        <strong>OneRingAI 1.0:</strong> Node.js 22+, 88 text/realtime registry records, dedicated image/video/voice/embedding registries, current OpenAI/Anthropic/Google/xAI APIs, 6,338 passing unit tests across 280 files, and 15 authenticated live API checks. Read the <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#upgrading-to-100">upgrade guide</a>, <a href="https://github.com/aantich/oneringai/blob/main/docs/MODEL_REGISTRY_AUDIT.md">model audit</a>, or <a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#100--2026-08-08">release notes</a>.
                     </div>
 
                     <div class="note-callout">
@@ -360,9 +360,9 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Image generation</td><td class="oneringai-col">Built-in (GPT Image 2, Gemini 3.1 native image, Imagen, Grok Imagine generation/editing)</td><td>Via community packages</td><td>DALL-E tool via crewai-tools</td><td>Via skills/extensions</td></tr>
+                                <tr><td>Image generation</td><td class="oneringai-col">Built-in (GPT Image 2, Gemini 3.1 native generation/editing with normalized sizes and multi-image requests, Imagen, Grok Imagine)</td><td>Via community packages</td><td>DALL-E tool via crewai-tools</td><td>Via skills/extensions</td></tr>
                                 <tr><td>Video generation</td><td class="oneringai-col">Built-in (Sora 2 with lifecycle metadata, Veo/Omni, Grok Imagine Video 1.5)</td><td>Not native</td><td>Not supported</td><td>Not built-in</td></tr>
-                                <tr><td>Voice / TTS / STT</td><td class="oneringai-col">OpenAI Realtime and xAI Voice Agent, plus OpenAI/Google/xAI TTS and STT with xAI streaming transcription</td><td>Community packages</td><td>Not supported</td><td>Via extensions</td></tr>
+                                <tr><td>Voice / TTS / STT</td><td class="oneringai-col">OpenAI Realtime and xAI Voice Agent, plus OpenAI/Google/xAI TTS and STT with multichannel xAI streaming transcription</td><td>Community packages</td><td>Not supported</td><td>Via extensions</td></tr>
                                 <tr><td>Model registries</td><td class="oneringai-col">88 text/realtime, 19 image, 9 video, 7 TTS, 11 STT, and 12 embedding records with schema-v2 metadata</td><td>No registries</td><td>No registries</td><td>No registries</td></tr>
                             </tbody>
                         </table>
@@ -422,7 +422,7 @@
                                 <tr><td>Multi-tenant</td><td class="oneringai-col">userId scoping, connector allowlist, OAuth token isolation, StorageContext</td><td>Namespace-based (manual)</td><td>Not supported</td><td>Single-user only</td></tr>
                                 <tr><td>Observability</td><td class="oneringai-col">Logger + Metrics + EventEmitter on all core classes &mdash; no SaaS required</td><td>LangSmith (paid SaaS)</td><td>AMP tracing (paid, $99&ndash;$120K/yr)</td><td>Event bus</td></tr>
                                 <tr><td>API stability</td><td class="oneringai-col">Semantic versioning, TypeScript strict mode</td><td>Frequent breaking changes</td><td>Memory system rewritten; some API churn</td><td>CalVer (daily releases)</td></tr>
-                                <tr><td>Tests</td><td class="oneringai-col">6,327 unit tests across 278 files, plus authenticated live vendor checks</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
+                                <tr><td>Tests</td><td class="oneringai-col">6,338 unit tests across 280 files, plus 15 authenticated live API checks</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
                                 <tr><td>Lifecycle hooks</td><td class="oneringai-col">turn:start, tool:executed, iteration:complete, beforeCompaction, onError</td><td>Callbacks (complex middleware)</td><td>@before_llm_call, @after_llm_call, @before_tool_call, @after_tool_call</td><td>Plugin hooks</td></tr>
                             </tbody>
                         </table>
