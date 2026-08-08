@@ -420,10 +420,10 @@
                             </div>
                             <div class="panel col-12 max-w-1000px mx-auto mt-2" data-anime="scale: [1.05, 1]; opacity: [0, 1]; easing: easeOutCubic; duration: 750; delay: 500;">
                                 <div class="rounded lg:rounded-1-5 xl:rounded-2 border border-dark contrast-shadow-lg overflow-hidden bg-white dark:bg-gray-900 p-3 sm:p-4 lg:p-5">
-                                    <div class="row child-cols-12 sm:child-cols-2 g-3 text-start">
+                                    <div class="row child-cols-12 sm:child-cols-6 lg:child-cols-3 g-3 text-start">
                                         <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">MODELS</span><h2 class="h5 mt-1 mb-1">Current vendor APIs</h2><p class="fs-7 opacity-70 m-0">GPT-5.6, Claude 5, Gemini 3.6, Grok 4.5, and lifecycle-aware aliases.</p></div></div>
-                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">REALTIME</span><h2 class="h5 mt-1 mb-1">Live voice agents</h2><p class="fs-7 opacity-70 m-0">OpenAI Realtime and xAI Voice Agent with WebSocket, WebRTC credentials, tools, VAD, and SIP control.</p></div></div>
-                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">MEDIA</span><h2 class="h5 mt-1 mb-1">Images, video, and audio</h2><p class="fs-7 opacity-70 m-0">GPT Image 2, Gemini native image, Veo/Omni, Grok Imagine, TTS, STT, and multimodal embeddings.</p></div></div>
+                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">REALTIME</span><h2 class="h5 mt-1 mb-1">Live voice agents</h2><p class="fs-7 opacity-70 m-0">OpenAI Realtime and xAI Voice Agent with WebSocket, WebRTC credentials, tools, provider-correct VAD, and SIP control.</p></div></div>
+                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">MEDIA</span><h2 class="h5 mt-1 mb-1">Images, video, and audio</h2><p class="fs-7 opacity-70 m-0">GPT Image 2, Gemini native image, Veo/Omni, Grok Imagine, raw telephony STT, TTS, and multimodal embeddings.</p></div></div>
                                         <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">PRODUCTION</span><h2 class="h5 mt-1 mb-1">Agents that hold up</h2><p class="fs-7 opacity-70 m-0">Connectors, permissions, memory, tools, orchestration, resilience, storage, and MCP in one package.</p></div></div>
                                     </div>
                                 </div>
@@ -445,10 +445,10 @@
                             <h2 class="h3 lg:h2 m-0">What's new in <span class="px-1 bg-tertiary text-primary">OneRingAI 1.0</span></h2>
                             <p class="fs-6 xl:fs-3 xl:px-8">A stable public foundation and a complete refresh of the first-party OpenAI, Anthropic, Google, and xAI APIs.</p>
                         </div>
-                        <div class="row child-cols-12 md:child-cols-2 g-3 lg:g-4 col-match">
+                        <div class="row child-cols-12 md:child-cols-6 lg:child-cols-3 g-3 lg:g-4 col-match">
                             <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Registry schema v2</h3><p class="fs-6 opacity-70 mb-0">88 text and realtime records plus dedicated image, video, TTS, STT, and embedding registries. Every registry understands lifecycle, aliases, snapshots, endpoints, replacements, preferred choices, official sources, and richer pricing.</p></div></div>
-                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Realtime voice, fully supported</h3><p class="fs-6 opacity-70 mb-0">Build OpenAI Realtime and xAI Voice Agent experiences with typed events, tools, VAD, WebSocket/WebRTC credentials, live transcription and translation, SIP control, telephony bridging, and conversation resumption.</p></div></div>
-                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Current multimodal APIs</h3><p class="fs-6 opacity-70 mb-0">Use current text, image, video, speech, and embedding models through unified providers—including normalized Gemini multi-image generation, native multimodal Gemini Embedding 2, and multichannel xAI streaming speech-to-text.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Realtime voice, fully supported</h3><p class="fs-6 opacity-70 mb-0">Build OpenAI Realtime and xAI Voice Agent experiences with typed events, tools, provider-correct VAD, WebSocket/WebRTC credentials, live transcription and translation, SIP control, telephony bridging, and conversation resumption.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Current multimodal APIs</h3><p class="fs-6 opacity-70 mb-0">Use current text, image, video, speech, and embedding models—including 8 kHz telephony transcription, normalized Gemini timestamps, URL-safe Gemini Embedding 2 media, Omni image-to-video, and multichannel xAI streaming STT.</p></div></div>
                             <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Deliberate major-version contract</h3><p class="fs-6 opacity-70 mb-0">Node.js 22+, current vendor SDKs, nullable unknown token limits, lifecycle-aware availability, alias lookup helpers, and stored Google Interactions with previous-response continuity for Gemini 3.5+.</p></div></div>
                         </div>
                         <div class="vstack md:hstack justify-center gap-2 mt-4 lg:mt-6">
@@ -2247,7 +2247,7 @@
                                 </tr>
                                 <tr>
                                     <td>TTS / STT</td>
-                                    <td class="oneringai-col">Built-in OpenAI, Google, and xAI TTS/STT, multichannel streaming xAI STT, OpenAI Realtime, and xAI Voice Agent</td>
+                                    <td class="oneringai-col">Built-in OpenAI, Google, and xAI TTS/STT, raw 8 kHz telephony audio, normalized Gemini timestamps, multichannel xAI streaming STT, OpenAI Realtime, and xAI Voice Agent</td>
                                     <td>Community packages</td>
                                     <td>Not supported</td>
                                     <td>Via extensions</td>
@@ -2352,7 +2352,7 @@
                                 </tr>
                                 <tr>
                                     <td>Tests</td>
-                                    <td class="oneringai-col">6,338 unit tests across 280 files, plus 15 authenticated live API checks</td>
+                                    <td class="oneringai-col">6,350 unit tests across 283 files, plus 19 authenticated live API checks</td>
                                     <td>Vitest matchers (recently added)</td>
                                     <td>Comprehensive pytest suite</td>
                                     <td>Community testing</td>
