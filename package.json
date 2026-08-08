@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "lexend",
-  "version": "4.0",
-  "description": "SaaS, Software & Startup Site Template.",
+  "name": "oneringai.io",
+  "version": "1.0.0",
+  "description": "Official website for the OneRingAI TypeScript agent library.",
   "author": "UniStudio",
   "license": "SEE LICENSE IN LICENSE.md",
   "main": "index.js",

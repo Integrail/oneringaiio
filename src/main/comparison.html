@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneRingAI vs LangChain vs CrewAI vs OpenClaw - Full Comparison</title>
-    <meta name="description" content="Comprehensive feature comparison between OneRingAI, LangChain, CrewAI, and OpenClaw. Architecture, security, tools, orchestration, context management, and more.">
+    <title>OneRingAI 1.0 vs LangChain vs CrewAI vs OpenClaw - Full Comparison</title>
+    <meta name="description" content="OneRingAI 1.0 feature comparison covering architecture, registry v2, current vendor APIs, realtime voice, security, tools, orchestration, context, and multimodal inference.">
     <meta name="keywords" content="oneringai, crewai, langchain, openclaw, ai framework comparison, agent framework, typescript ai, llm framework">
     <meta name="theme-color" content="#178d72">
 
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="OneRingAI vs LangChain vs CrewAI vs OpenClaw &mdash; Full Comparison" />
-    <meta property="og:description" content="Comprehensive feature comparison: architecture, security, tools, multi-agent orchestration, context management, and more." />
+    <meta property="og:title" content="OneRingAI 1.0 vs LangChain vs CrewAI vs OpenClaw &mdash; Full Comparison" />
+    <meta property="og:description" content="Updated for OneRingAI 1.0: registry v2, current vendor APIs, realtime voice, multimodal inference, security, tools, orchestration, and context." />
 
     <link rel="preload" href="../assets/css/fonts.css" as="style">
     <link rel="preload" href="../assets/css/unicons.min.css" as="style">
@@ -86,10 +86,14 @@
 
                     <!-- Hero -->
                     <div class="text-center mb-4">
-                        <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Full Comparison</span>
+                        <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Updated for Version 1.0</span>
                         <h1 class="h2 lg:h1 mt-2 mb-1">OneRingAI vs LangChain vs CrewAI vs OpenClaw</h1>
-                        <p class="fs-5 opacity-70">Comprehensive Feature Comparison &mdash; April 2026</p>
-                        <p class="fs-6 mt-2 mx-auto" style="max-width: 800px;">An in-depth, source-code-level analysis of four AI agent frameworks. Based on actual repository exploration, not marketing claims.</p>
+                        <p class="fs-5 opacity-70">Comprehensive Feature Comparison &mdash; August 2026</p>
+                        <p class="fs-6 mt-2 mx-auto" style="max-width: 800px;">An in-depth, source-code-level analysis of four AI agent frameworks, updated for OneRingAI 1.0's stable connector-first API, registry schema v2, current model families, and realtime voice support.</p>
+                    </div>
+
+                    <div class="why-callout">
+                        <strong>OneRingAI 1.0:</strong> Node.js 22+, 88 text/realtime registry records, dedicated image/video/voice/embedding registries, current OpenAI/Anthropic/Google/xAI APIs, and 6,327 passing unit tests. Read the <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#upgrading-to-100">upgrade guide</a>, <a href="https://github.com/aantich/oneringai/blob/main/docs/MODEL_REGISTRY_AUDIT.md">model audit</a>, or <a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#100--2026-08-08">release notes</a>.
                     </div>
 
                     <div class="note-callout">
@@ -131,7 +135,7 @@
                                 <tr><td>Type</td><td class="oneringai-col">Developer SDK / library</td><td>Developer SDK / framework</td><td>Developer framework</td><td>Self-hosted product</td></tr>
                                 <tr><td>Abstraction layers</td><td class="oneringai-col">1 (Connector &rarr; Agent &rarr; Provider)</td><td>4+ (Runnables, Chains, Agents, Callbacks, Tools, Graph)</td><td>3 (Agents, Tasks, Crews + Flows)</td><td>3 (Gateway, Channels, Skills/Plugins)</td></tr>
                                 <tr><td>Learning curve</td><td class="oneringai-col">Low &mdash; single Agent.create() entry point</td><td>High &mdash; devs report needing to "dig deep into source code" for simple tasks</td><td>Low &mdash; role/goal/backstory metaphor</td><td>Low &mdash; install and run</td></tr>
-                                <tr><td>Runtime</td><td class="oneringai-col">Node.js 18+</td><td>Node.js 20+, Cloudflare Workers, Vercel Edge, Deno, Bun</td><td>Python 3.10&ndash;3.13</td><td>Node.js 22+</td></tr>
+                                <tr><td>Runtime</td><td class="oneringai-col">Node.js 22+, ESM and CJS builds</td><td>Node.js 20+, Cloudflare Workers, Vercel Edge, Deno, Bun</td><td>Python 3.10&ndash;3.13</td><td>Node.js 22+</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -149,7 +153,7 @@
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
                                 <tr><td>Vendors</td><td class="oneringai-col">12 native (OpenAI, Anthropic, Google, Vertex, Groq, Together, Perplexity, Grok, DeepSeek, Mistral, Ollama, Custom)</td><td>36+ via dedicated @langchain/* packages</td><td>6 native + LiteLLM fallback for 20+</td><td>30+ via extensions</td></tr>
-                                <tr><td>Model registry</td><td class="oneringai-col">36 LLMs with pricing, context windows, 10+ feature flags</td><td>No centralized registry</td><td>100+ models mapped for context windows</td><td>No registry</td></tr>
+                                <tr><td>Model registry</td><td class="oneringai-col">Schema v2: 88 text/realtime records with lifecycle, aliases, snapshots, endpoints, replacements, official sources, pricing, and capabilities</td><td>No centralized registry</td><td>100+ models mapped for context windows</td><td>No registry</td></tr>
                                 <tr><td>Cost calculation</td><td class="oneringai-col">calculateCost(model, in, out) &rarr; exact USD</td><td>Third-party (LangSmith)</td><td>No built-in</td><td>No built-in</td></tr>
                                 <tr><td>Multi-key per vendor</td><td class="oneringai-col">Named connectors: openai-main, openai-backup</td><td>Not native</td><td>Not native</td><td>Auth profile rotation with failover</td></tr>
                                 <tr><td>Vendor switching</td><td class="oneringai-col">Change connector name, nothing else</td><td>Swap provider class + config</td><td>Change LLM string</td><td>Change extension config</td></tr>
@@ -172,10 +176,10 @@
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
                                 <tr><td>Auth model</td><td class="oneringai-col">Centralized Connector registry (single source of truth)</td><td>No auth abstraction &mdash; each integration has own auth</td><td>Env vars or LiteLLM config</td><td>Auth profiles per extension</td></tr>
-                                <tr><td>OAuth 2.0</td><td class="oneringai-col">Built-in: 4 flows (PKCE, Client Credentials, JWT Bearer, Static Token), AES-256-GCM encrypted storage, 43+ vendor templates</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
+                                <tr><td>OAuth 2.0</td><td class="oneringai-col">Built-in flows, AES-256-GCM encrypted storage, refresh-strategy enforcement, and 50 vendor templates</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
                                 <tr><td>Multi-user isolation</td><td class="oneringai-col">userId + accountId scoping, connector allowlist per agent</td><td>Manual implementation</td><td>Not supported</td><td>Single-user trust model</td></tr>
                                 <tr><td>Resilience</td><td class="oneringai-col">Per-connector: circuit breaker, retry w/ exponential backoff + jitter, timeout via AbortController</td><td>Basic retries via Runnable</td><td>Basic retry via LiteLLM</td><td>Provider failover policies</td></tr>
-                                <tr><td>External API tools</td><td class="oneringai-col">ConnectorTools.for('github') &mdash; auto-generates API tool from any connector (35+ services)</td><td>Community tool packages</td><td>Via Composio (external)</td><td>5,400+ skills on ClawHub</td></tr>
+                                <tr><td>External API tools</td><td class="oneringai-col">ConnectorTools.for('github') &mdash; auto-generates API tools from 50 service templates, plus custom services</td><td>Community tool packages</td><td>Via Composio (external)</td><td>5,400+ skills on ClawHub</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -232,8 +236,8 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Architecture</td><td class="oneringai-col">Plugin-first (AgentContextNextGen, ~8,500 LOC). 6 built-in plugins, PluginRegistry for custom plugins with auto-init via feature flags.</td><td>Short-term (state) + Long-term (Store API) + Legacy (Buffer/Summary)</td><td>Unified Memory with scoped storage + Knowledge (RAG)</td><td>Plugin-based context engine</td></tr>
-                                <tr><td>Built-in plugins</td><td class="oneringai-col"><strong>6 plugins</strong>: WorkingMemory (tiered: raw/summary/findings, priority eviction, task-aware scoping), InContextMemory (KV directly in prompt), PersistentInstructions (disk-backed, never compacted), UserInfo (user-scoped data + built-in TODO system with 3 tools), ToolCatalog (dynamic tool loading/unloading with 3 metatools), SharedWorkspace (multi-agent bulletin board)</td><td>No plugin system</td><td>Not extensible</td><td>Extensible via plugins</td></tr>
+                                <tr><td>Architecture</td><td class="oneringai-col">Plugin-first AgentContextNextGen with feature flags, token accounting, safe compaction, a custom plugin API, and unified store tools.</td><td>Short-term (state) + Long-term (Store API) + Legacy (Buffer/Summary)</td><td>Unified Memory with scoped storage + Knowledge (RAG)</td><td>Plugin-based context engine</td></tr>
+                                <tr><td>Built-in plugins</td><td class="oneringai-col">WorkingMemory, InContextMemory, ToolCatalog, SharedWorkspace, self-learning Memory read/write plugins, and background SessionIngestor. Legacy PersistentInstructions and UserInfo remain compatible but are deprecated.</td><td>No plugin system</td><td>Not extensible</td><td>Extensible via plugins</td></tr>
                                 <tr><td>Compaction strategies</td><td class="oneringai-col"><strong>Pluggable StrategyRegistry</strong> with 2 built-in: <em>Algorithmic</em> (moves large tool results to working memory, limits tool pairs to configurable max, rolling window) and <em>Default</em> (oldest-first with tool-pair preservation). compact() for emergency + consolidate() for post-cycle optimization. Custom strategies via ICompactionStrategy.</td><td>Message filtering / summarization</td><td>Auto-summarization at token limits</td><td>Built-in compaction</td></tr>
                                 <tr><td>Token budgeting</td><td class="oneringai-col">Per-plugin token tracking with detailed ContextBudget: system prompt, persistent instructions, plugin instructions, each plugin's content separately, tools, conversation, current input. Warning (&gt;70%) and critical (&gt;90%) events.</td><td>No native budget API</td><td>Context window management (85% safety ratio)</td><td>Provider-based</td></tr>
                                 <tr><td>In-Context Memory</td><td class="oneringai-col">KV stored DIRECTLY in system message &mdash; LLM sees values immediately without retrieval. Priority-based eviction (critical entries never evicted). Max 20 entries / 40K tokens. UI display support.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
@@ -243,7 +247,7 @@
                                 <tr><td>Tool Catalog</td><td class="oneringai-col">Dynamic tool loading/unloading by category. 3 metatools: tool_catalog_search, tool_catalog_load, tool_catalog_unload. Pinned categories. Scoping by built-in categories + connector identities.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
                                 <tr><td>Unified Store Tools</td><td class="oneringai-col"><strong>5 generic CRUD tools</strong> (store_get/set/delete/list/action) routed by StoreToolsManager to any IStoreHandler plugin. Dynamic descriptions reflect current handlers. Custom stores register automatically.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
                                 <tr><td>Custom plugins</td><td class="oneringai-col">PluginRegistry.register() with auto-init via feature flags. IContextPluginNextGen + IStoreHandler interfaces. Token cache pattern. Side-effect import registration.</td><td>No</td><td>No</td><td>Yes (plugins)</td></tr>
-                                <tr><td>Long-term memory</td><td class="oneringai-col">Via WorkingMemory (external storage with index) + PersistentInstructions (disk) + UserInfo (user-scoped)</td><td>Store API (namespace-based, cross-session, semantic/episodic/procedural)</td><td>Deep recall with LLM analysis, vector search, composite scoring</td><td>Wiki + knowledge plugins</td></tr>
+                                <tr><td>Long-term memory</td><td class="oneringai-col">Entity/fact graph with semantic search, profiles, provenance, graph traversal, permissions, behavior rules, and background extraction</td><td>Store API (namespace-based, cross-session, semantic/episodic/procedural)</td><td>Deep recall with LLM analysis, vector search, composite scoring</td><td>Wiki + knowledge plugins</td></tr>
                                 <tr><td>RAG / Knowledge</td><td class="oneringai-col">No built-in</td><td>Document loaders + vector stores + retrievers</td><td>Knowledge class with RAG pipeline (ChromaDB, Qdrant, 15+ embedding providers)</td><td>Wiki + knowledge plugins</td></tr>
                             </tbody>
                         </table>
@@ -272,7 +276,7 @@
   User message or tool results (newest, never compacted)</div>
 
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> The most comprehensive context management system in any agent framework: <strong>6 built-in plugins</strong> (~8,500 LOC), each token-tracked, all sharing a unified 5-tool CRUD interface via StoreToolsManager. InContextMemory puts state directly in the prompt. Pluggable compaction strategies with an algorithmic strategy that intelligently archives tool results. Custom plugins register with a single call and auto-initialize via feature flags. No other framework comes close.
+                        <strong>Why OneRingAI wins:</strong> Context, state, and long-term memory are one extensible system. Plugins are token-tracked, CRUD stores share one tool surface, InContextMemory makes important state immediately visible, compaction preserves tool pairs, and the memory graph adds semantic and relational recall with scoped permissions.
                     </div>
 
                     <!-- ============================== -->
@@ -356,15 +360,15 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Image generation</td><td class="oneringai-col">Built-in (DALL-E 3, gpt-image-1, Imagen 4, Grok Flux)</td><td>Via community packages</td><td>DALL-E tool via crewai-tools</td><td>Via skills/extensions</td></tr>
-                                <tr><td>Video generation</td><td class="oneringai-col">Built-in (Sora 2, Veo 3)</td><td>Not native</td><td>Not supported</td><td>Not built-in</td></tr>
-                                <tr><td>TTS / STT</td><td class="oneringai-col">Built-in (OpenAI, Google &mdash; 5 TTS models, Whisper STT)</td><td>Community packages</td><td>Not supported</td><td>Via extensions</td></tr>
-                                <tr><td>Model registries</td><td class="oneringai-col">8 image models + 6 video models with metadata</td><td>No registries</td><td>No registries</td><td>No registries</td></tr>
+                                <tr><td>Image generation</td><td class="oneringai-col">Built-in (GPT Image 2, Gemini 3.1 native image, Imagen, Grok Imagine generation/editing)</td><td>Via community packages</td><td>DALL-E tool via crewai-tools</td><td>Via skills/extensions</td></tr>
+                                <tr><td>Video generation</td><td class="oneringai-col">Built-in (Sora 2 with lifecycle metadata, Veo/Omni, Grok Imagine Video 1.5)</td><td>Not native</td><td>Not supported</td><td>Not built-in</td></tr>
+                                <tr><td>Voice / TTS / STT</td><td class="oneringai-col">OpenAI Realtime and xAI Voice Agent, plus OpenAI/Google/xAI TTS and STT with xAI streaming transcription</td><td>Community packages</td><td>Not supported</td><td>Via extensions</td></tr>
+                                <tr><td>Model registries</td><td class="oneringai-col">88 text/realtime, 19 image, 9 video, 7 TTS, 11 STT, and 12 embedding records with schema-v2 metadata</td><td>No registries</td><td>No registries</td><td>No registries</td></tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> Full multimedia pipeline built into a single library &mdash; text, images, video, TTS, and STT with typed model registries.
+                        <strong>Why OneRingAI wins:</strong> Full multimodal inference in one library &mdash; text, images, video, embeddings, TTS, STT, and realtime speech-to-speech with typed lifecycle-aware registries.
                     </div>
 
                     <!-- ============================== -->
@@ -397,7 +401,7 @@
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
                                 <tr><td>Built-in persistence</td><td class="oneringai-col">ctx.save() / ctx.load() &mdash; full conversation + all plugin states</td><td>Checkpointing with time-travel debugging</td><td>Flow persistence (SQLite)</td><td>Per-channel sessions</td></tr>
-                                <tr><td>What's persisted</td><td class="oneringai-col">Conversation + WorkingMemory + InContextMemory + PersistentInstructions + system prompt + all plugin states</td><td>Full graph state</td><td>Flow state (Pydantic typed)</td><td>Session state</td></tr>
+                                <tr><td>What's persisted</td><td class="oneringai-col">Conversation, context/plugin states, working and in-context memory, system prompt, and configurable long-term memory backends</td><td>Full graph state</td><td>Flow state (Pydantic typed)</td><td>Session state</td></tr>
                                 <tr><td>Storage backends</td><td class="oneringai-col">StorageRegistry: file, in-memory, pluggable custom (15 implementations). Lazy instantiation, factory pattern.</td><td>Postgres, SQLite, Redis, in-memory</td><td>SQLite (built-in), custom</td><td>Multiple backends</td></tr>
                                 <tr><td>Multi-tenant storage</td><td class="oneringai-col">StorageContext (userId, tenantId, orgId) with per-agent/per-user factories</td><td>Namespace-based Store</td><td>Scoped paths</td><td>Single-user</td></tr>
                                 <tr><td>Agent definitions</td><td class="oneringai-col">Agent.saveDefinition() / Agent.fromStorage()</td><td>Not native</td><td>YAML-based config (@crew, @agent, @task decorators)</td><td>Not applicable</td></tr>
@@ -418,7 +422,7 @@
                                 <tr><td>Multi-tenant</td><td class="oneringai-col">userId scoping, connector allowlist, OAuth token isolation, StorageContext</td><td>Namespace-based (manual)</td><td>Not supported</td><td>Single-user only</td></tr>
                                 <tr><td>Observability</td><td class="oneringai-col">Logger + Metrics + EventEmitter on all core classes &mdash; no SaaS required</td><td>LangSmith (paid SaaS)</td><td>AMP tracing (paid, $99&ndash;$120K/yr)</td><td>Event bus</td></tr>
                                 <tr><td>API stability</td><td class="oneringai-col">Semantic versioning, TypeScript strict mode</td><td>Frequent breaking changes</td><td>Memory system rewritten; some API churn</td><td>CalVer (daily releases)</td></tr>
-                                <tr><td>Tests</td><td class="oneringai-col">3,000+ unit tests</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
+                                <tr><td>Tests</td><td class="oneringai-col">6,327 unit tests across 278 files, plus authenticated live vendor checks</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
                                 <tr><td>Lifecycle hooks</td><td class="oneringai-col">turn:start, tool:executed, iteration:complete, beforeCompaction, onError</td><td>Callbacks (complex middleware)</td><td>@before_llm_call, @after_llm_call, @before_tool_call, @after_tool_call</td><td>Plugin hooks</td></tr>
                             </tbody>
                         </table>
@@ -455,9 +459,9 @@
                                 <tr><td>Auth</td><td class="oneringai-col">Only framework with connector-first architecture + built-in OAuth 2.0</td><td>No auth abstraction</td><td>No auth abstraction</td><td>Auth profiles, not programmatic</td></tr>
                                 <tr><td>Security</td><td class="oneringai-col">3-tier permission system with 8 policy types</td><td>No built-in security; CVEs reported</td><td>No OSS security</td><td>Tool policies, single-user only</td></tr>
                                 <tr><td>Resilience</td><td class="oneringai-col">Only framework with per-tool circuit breakers + rate limiting</td><td>No circuit breakers</td><td>No circuit breakers</td><td>No circuit breakers</td></tr>
-                                <tr><td>Context</td><td class="oneringai-col">6 built-in plugins (~8,500 LOC), pluggable compaction strategies, unified store tools, per-plugin token budgets</td><td>Split memory systems, no plugin architecture</td><td>Good unified Memory but no plugin system or compaction control</td><td>Not developer-accessible</td></tr>
+                                <tr><td>Context</td><td class="oneringai-col">Plugin-first context, pluggable compaction, unified store tools, per-plugin budgets, and a scoped entity/fact memory graph</td><td>Split memory systems, no plugin architecture</td><td>Good unified Memory but no plugin system or compaction control</td><td>Not developer-accessible</td></tr>
                                 <tr><td>Orchestration</td><td class="oneringai-col">Built-in orchestrator with 3 routing modes, 5-phase planning, interactive delegation with 3 monitoring modes, SharedWorkspace with auto-deltas</td><td>LangGraph is powerful but requires building from primitives</td><td>Crew/Flow is simpler but less nuanced</td><td>Flat subagent tree</td></tr>
-                                <tr><td>Multi-modal</td><td class="oneringai-col">Single library: text + image + video + TTS + STT</td><td>Requires community packages</td><td>Minimal support</td><td>Via extensions only</td></tr>
+                                <tr><td>Multi-modal</td><td class="oneringai-col">Single library: text + image + video + embeddings + TTS + STT + realtime voice</td><td>Requires community packages</td><td>Minimal support</td><td>Via extensions only</td></tr>
                                 <tr><td>Desktop</td><td class="oneringai-col">Built-in computer use (11 tools)</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
                                 <tr><td>TypeScript</td><td class="oneringai-col">Full strict mode type safety</td><td>TS but heavy abstraction layers</td><td>Python-only</td><td>TS but not a developer SDK</td></tr>
                                 <tr><td>Enterprise</td><td class="oneringai-col">Multi-tenant, permissions, hooks &mdash; all built-in, no paid SaaS</td><td>Observability requires paid LangSmith</td><td>Features gated behind paid AMP</td><td>Single-user only</td></tr>
@@ -467,11 +471,11 @@
 
                     <!-- Closing -->
                     <div class="why-callout mt-4 mb-6">
-                        <p class="fs-6 mb-0">OneRingAI is what you'd build if you started fresh in 2025, knowing everything wrong with LangChain's abstraction maze, CrewAI's Python-only limitations, and the security gaps across the entire ecosystem &mdash; a single TypeScript library with auth, security, resilience, multi-modal, orchestration, and context management built in from day one. No paid SaaS required.</p>
+                        <p class="fs-6 mb-0">OneRingAI 1.0 is a stable, connector-first TypeScript foundation for production agents: current vendor APIs, lifecycle-aware model registries, auth, security, resilience, multimodal inference, realtime voice, orchestration, tools, and context management in one package. No paid SaaS required.</p>
                     </div>
 
                     <div class="text-center mb-4">
-                        <p class="fs-7 opacity-50">Based on source code analysis &mdash; April 2026. OneRingAI v0.5.x, LangChain.js v1.3.x, CrewAI v1.14.x, OpenClaw v2026.4.x.</p>
+                        <p class="fs-7 opacity-50">OneRingAI facts verified against version 1.0.0 source and release documentation &mdash; August 2026. Competitor facts retain the comparison audit's cited baseline and should be rechecked before external publication.</p>
                     </div>
 
                 </div>
