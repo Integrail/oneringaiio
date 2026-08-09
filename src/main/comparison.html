@@ -134,13 +134,13 @@
                                 <tr><td>Codebase</td><td class="oneringai-col">~109K LOC / 20 deps / single package</td><td>~200K+ LOC / 15+ packages (monorepo)</td><td>~100K LOC / 33 deps</td><td>~300K+ LOC / extensions</td></tr>
                                 <tr><td>Type</td><td class="oneringai-col">Developer SDK / library</td><td>Developer SDK / framework</td><td>Developer framework</td><td>Self-hosted product</td></tr>
                                 <tr><td>Abstraction layers</td><td class="oneringai-col">1 (Connector &rarr; Agent &rarr; Provider)</td><td>4+ (Runnables, Chains, Agents, Callbacks, Tools, Graph)</td><td>3 (Agents, Tasks, Crews + Flows)</td><td>3 (Gateway, Channels, Skills/Plugins)</td></tr>
-                                <tr><td>Learning curve</td><td class="oneringai-col">Low &mdash; single Agent.create() entry point</td><td>High &mdash; devs report needing to "dig deep into source code" for simple tasks</td><td>Low &mdash; role/goal/backstory metaphor</td><td>Low &mdash; install and run</td></tr>
+                                <tr><td>Setup surface</td><td class="oneringai-col">Single Agent.create() entry point</td><td>Models, agents, middleware, tools, and LangGraph primitives</td><td>Role/goal/backstory agents, tasks, crews, and flows</td><td>Install, configure channels, and run</td></tr>
                                 <tr><td>Runtime</td><td class="oneringai-col">Node.js 22+, ESM and CJS builds</td><td>Node.js 20+, Cloudflare Workers, Vercel Edge, Deno, Bun</td><td>Python 3.10&ndash;3.13</td><td>Node.js 22+</td></tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> Single-library, minimal-dependency design avoids the "abstraction maze" that has plagued LangChain. Developers report <strong>40% performance improvement</strong> switching from LangChain's Runnable layers to direct SDK calls &mdash; OneRingAI's thin abstraction gives you that performance without losing framework benefits.
+                        <strong>OneRingAI's advantage:</strong> A compact, single-package TypeScript surface keeps the common path at Connector &rarr; Agent &rarr; Provider. Runtime performance depends on the workload and provider, so benchmark your own use case rather than relying on framework-wide percentage claims.
                     </div>
 
                     <!-- ============================== -->
@@ -156,7 +156,7 @@
                                 <tr><td>Model registry</td><td class="oneringai-col">Schema v2: 88 text/realtime records with lifecycle, aliases, snapshots, endpoints, replacements, official sources, pricing, and capabilities</td><td>No centralized registry</td><td>100+ models mapped for context windows</td><td>No registry</td></tr>
                                 <tr><td>Cost calculation</td><td class="oneringai-col">calculateCost(model, in, out) &rarr; exact USD</td><td>Third-party (LangSmith)</td><td>No built-in</td><td>No built-in</td></tr>
                                 <tr><td>Multi-key per vendor</td><td class="oneringai-col">Named connectors: openai-main, openai-backup</td><td>Not native</td><td>Not native</td><td>Auth profile rotation with failover</td></tr>
-                                <tr><td>Vendor switching</td><td class="oneringai-col">Change connector name, nothing else</td><td>Swap provider class + config</td><td>Change LLM string</td><td>Change extension config</td></tr>
+                                <tr><td>Vendor switching</td><td class="oneringai-col">Change <code>connector</code> and <code>model</code>; prompts, tools, memory, and agent logic stay unchanged</td><td>Change model integration and provider-specific config</td><td>Change LLM/model config</td><td>Change extension config</td></tr>
                                 <tr><td>Thinking / reasoning</td><td class="oneringai-col">Vendor-agnostic config &mdash; maps to Anthropic budgets, OpenAI effort, Google thinkingLevel</td><td>Per-provider configuration</td><td>No unified abstraction</td><td>Per-provider</td></tr>
                                 <tr><td>Structured output</td><td class="oneringai-col">responseFormat on Agent with JSON Schema</td><td>withStructuredOutput() with auto-strategy</td><td>output_pydantic / output_json on Task</td><td>Not available</td></tr>
                             </tbody>
@@ -175,16 +175,16 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Auth model</td><td class="oneringai-col">Centralized Connector registry (single source of truth)</td><td>No auth abstraction &mdash; each integration has own auth</td><td>Env vars or LiteLLM config</td><td>Auth profiles per extension</td></tr>
-                                <tr><td>OAuth 2.0</td><td class="oneringai-col">Built-in flows, AES-256-GCM encrypted storage, refresh-strategy enforcement, and 50 vendor templates</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
-                                <tr><td>Multi-user isolation</td><td class="oneringai-col">userId + accountId scoping, connector allowlist per agent</td><td>Manual implementation</td><td>Not supported</td><td>Single-user trust model</td></tr>
+                                <tr><td>Auth model</td><td class="oneringai-col">Centralized Connector registry (single source of truth)</td><td>Credentials configured per model or tool integration; no shared connector registry equivalent</td><td>Credentials configured per model or tool integration, commonly through environment or config</td><td>Auth profiles per extension</td></tr>
+                                <tr><td>OAuth 2.0</td><td class="oneringai-col">Built-in flows, AES-256-GCM encrypted storage, refresh-strategy enforcement, and 50 vendor templates</td><td>No framework-level multi-service OAuth registry</td><td>No framework-level multi-service OAuth registry</td><td>Extension-specific authentication</td></tr>
+                                <tr><td>Multi-user isolation</td><td class="oneringai-col">userId + accountId scoping, connector allowlist per agent</td><td>Implemented by the host application</td><td>Managed team controls in CrewAI Enterprise; application scoping remains host-defined in OSS</td><td>Designed around a single-user trust boundary</td></tr>
                                 <tr><td>Resilience</td><td class="oneringai-col">Per-connector: circuit breaker, retry w/ exponential backoff + jitter, timeout via AbortController</td><td>Basic retries via Runnable</td><td>Basic retry via LiteLLM</td><td>Provider failover policies</td></tr>
-                                <tr><td>External API tools</td><td class="oneringai-col">ConnectorTools.for('github') &mdash; auto-generates API tools from 50 service templates, plus custom services</td><td>Community tool packages</td><td>Via Composio (external)</td><td>5,400+ skills on ClawHub</td></tr>
+                                <tr><td>External API tools</td><td class="oneringai-col"><code>ConnectorTools.for('work-github')</code> adds generic authenticated API access plus GitHub's specialized bundle. The catalog covers 50 auth templates, selected specialized bundles, and custom services.</td><td>Community tool packages</td><td>Via Composio (external)</td><td>5,400+ skills on ClawHub</td></tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> The <strong>only framework</strong> with connector-first design &mdash; a typed registry with built-in OAuth, encrypted storage, multi-user isolation, and per-connector resilience. No other framework even has an auth abstraction.
+                        <strong>OneRingAI's advantage:</strong> The Connector API combines provider credentials, multi-service OAuth, encrypted storage, multi-user scoping, and per-connector resilience behind one typed registry. Other frameworks generally configure credentials at the model, tool, extension, or host-application layer.
                     </div>
 
                     <!-- ============================== -->
@@ -196,15 +196,14 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Permission system</td><td class="oneringai-col">3-tier: user rules &rarr; delegation hierarchy &rarr; 8-policy chain</td><td>None built-in</td><td>None in OSS (RBAC in paid AMP only)</td><td>Tool policy pipeline with exec approvals</td></tr>
-                                <tr><td>Tool-level scoping</td><td class="oneringai-col">Per-tool: always / session / once / never</td><td>None</td><td>None</td><td>Exec approval per command</td></tr>
-                                <tr><td>Built-in policies</td><td class="oneringai-col">Allowlist, Blocklist, RateLimit, PathRestriction, BashFilter, SessionApproval, Role, UrlAllowlist</td><td>None</td><td>None</td><td>Path + filesystem policies</td></tr>
-                                <tr><td>Rate limiting</td><td class="oneringai-col">Per-tool, per-user, per-session limits</td><td>None</td><td>None</td><td>None</td></tr>
+                                <tr><td>Permission system</td><td class="oneringai-col">3-tier: user rules &rarr; delegation hierarchy &rarr; 8-policy chain</td><td>Guardrails and middleware; no equivalent 3-tier permission-policy manager</td><td>Task guardrails and human feedback; RBAC is part of CrewAI Enterprise</td><td>Tool policy pipeline with exec approvals</td></tr>
+                                <tr><td>Tool-level scoping</td><td class="oneringai-col">Per-tool: always / session / once / never</td><td>Human-in-the-loop middleware can gate selected tools</td><td>Human feedback can gate workflow steps</td><td>Exec approval per command</td></tr>
+                                <tr><td>Built-in policies</td><td class="oneringai-col">Allowlist, Blocklist, RateLimit, PathRestriction, BashFilter, SessionApproval, Role, UrlAllowlist</td><td>PII detection, human-in-the-loop, model/tool call limits, and custom middleware</td><td>Task guardrails, callbacks, and human feedback</td><td>Tool allow/deny policy, sandboxing, and exec approvals</td></tr>
+                                <tr><td>Rate limiting</td><td class="oneringai-col">Per-tool, per-user, per-session limits</td><td>Custom middleware; built-in model/tool call-count limits</td><td>Host/application concern</td><td>Host/application concern</td></tr>
                                 <tr><td>Circuit breakers</td><td class="oneringai-col">Per-tool + per-provider (configurable thresholds)</td><td>None</td><td>None</td><td>None</td></tr>
                                 <tr><td>Human-in-the-loop</td><td class="oneringai-col">Approval callbacks with session caching</td><td>interrupt() in LangGraph</td><td>@human_feedback decorator in Flow</td><td>Exec approval requests</td></tr>
                                 <tr><td>Sandboxing</td><td class="oneringai-col">Not built-in</td><td>Deprecated &mdash; external containers</td><td>Not built-in</td><td>Docker-based sandbox</td></tr>
-                                <tr><td>Audit trail</td><td class="oneringai-col">Event-based: permission:allow, permission:deny, permission:audit</td><td>None</td><td>91 event types (observability)</td><td>Mutation tracking</td></tr>
-                                <tr><td>Known CVEs</td><td class="oneringai-col">None reported</td><td>CVE-2025-68664/68665 (serialization injection, CVSS 8.6)</td><td>None reported</td><td>None reported</td></tr>
+                                <tr><td>Audit trail</td><td class="oneringai-col">Event-based: permission:allow, permission:deny, permission:audit</td><td>LangSmith tracing or custom logging middleware</td><td>Event listeners in OSS; managed traces in CrewAI Enterprise</td><td>Mutation tracking and approval events</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -224,7 +223,7 @@
 5. Session Cache (in-memory, for repeated approvals)</div>
 
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> The most complete security model of any AI agent framework. 3-tier permission evaluation with 8 policy types, per-tool circuit breakers, rate limiting, and bash filtering. LangChain and CrewAI have <strong>no built-in security whatsoever</strong>.
+                        <strong>OneRingAI's advantage:</strong> Its security controls are packaged as a cohesive library layer: 3-tier permission evaluation, 8 policy types, per-tool circuit breakers, rate limiting, and bash filtering. LangChain, CrewAI, and OpenClaw also provide guardrails or approval controls, but with different scopes and deployment models.
                     </div>
 
                     <!-- ============================== -->
@@ -242,13 +241,13 @@
                                 <tr><td>Token budgeting</td><td class="oneringai-col">Per-plugin token tracking with detailed ContextBudget: system prompt, persistent instructions, plugin instructions, each plugin's content separately, tools, conversation, current input. Warning (&gt;70%) and critical (&gt;90%) events.</td><td>No native budget API</td><td>Context window management (85% safety ratio)</td><td>Provider-based</td></tr>
                                 <tr><td>In-Context Memory</td><td class="oneringai-col">KV stored DIRECTLY in system message &mdash; LLM sees values immediately without retrieval. Priority-based eviction (critical entries never evicted). Max 20 entries / 40K tokens. UI display support.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
                                 <tr><td>Working Memory</td><td class="oneringai-col">Hierarchical tiers (raw &rarr; summary &rarr; findings with auto-priority escalation), priority-based eviction (low/normal/high/critical) with LRU fallback, task-aware scoping (session/plan/persistent), pinned entries</td><td>External (Redis, vector DB)</td><td>Unified Memory with composite scoring (recency + semantic + importance)</td><td>Plugin-based</td></tr>
-                                <tr><td>Persistent Instructions</td><td class="oneringai-col">KVP model, disk-persisted per agent (~/.oneringai/agents/&lt;id&gt;/), never compacted, up to 50 entries / 50K chars</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
-                                <tr><td>User Info</td><td class="oneringai-col">User-scoped data shared across all agents. Built-in TODO system: todo_add, todo_update, todo_remove tools. Proactive reminder logic. Internal entries (keys starting with _) hidden from context.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
+                                <tr><td>Persistent Instructions</td><td class="oneringai-col"><strong>Legacy / deprecated.</strong> Disk-persisted keyed instructions remain compatible; prefer MemoryPluginNextGen for new applications.</td><td>Not available as an equivalent built-in</td><td>Not available as an equivalent built-in</td><td>Not available as an equivalent built-in</td></tr>
+                                <tr><td>User Info</td><td class="oneringai-col"><strong>Legacy / deprecated.</strong> User-scoped data and TODO tools remain compatible; prefer MemoryPluginNextGen for new applications.</td><td>Not available as an equivalent built-in</td><td>Not available as an equivalent built-in</td><td>Not available as an equivalent built-in</td></tr>
                                 <tr><td>Tool Catalog</td><td class="oneringai-col">Dynamic tool loading/unloading by category. 3 metatools: tool_catalog_search, tool_catalog_load, tool_catalog_unload. Pinned categories. Scoping by built-in categories + connector identities.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
                                 <tr><td>Unified Store Tools</td><td class="oneringai-col"><strong>5 generic CRUD tools</strong> (store_get/set/delete/list/action) routed by StoreToolsManager to any IStoreHandler plugin. Dynamic descriptions reflect current handlers. Custom stores register automatically.</td><td>Not available</td><td>Not available</td><td>Not available</td></tr>
                                 <tr><td>Custom plugins</td><td class="oneringai-col">PluginRegistry.register() with auto-init via feature flags. IContextPluginNextGen + IStoreHandler interfaces. Token cache pattern. Side-effect import registration.</td><td>No</td><td>No</td><td>Yes (plugins)</td></tr>
                                 <tr><td>Long-term memory</td><td class="oneringai-col">Entity/fact graph with semantic search, profiles, provenance, graph traversal, permissions, behavior rules, and background extraction</td><td>Store API (namespace-based, cross-session, semantic/episodic/procedural)</td><td>Deep recall with LLM analysis, vector search, composite scoring</td><td>Wiki + knowledge plugins</td></tr>
-                                <tr><td>RAG / Knowledge</td><td class="oneringai-col">No built-in</td><td>Document loaders + vector stores + retrievers</td><td>Knowledge class with RAG pipeline (ChromaDB, Qdrant, 15+ embedding providers)</td><td>Wiki + knowledge plugins</td></tr>
+                                <tr><td>Documents / RAG</td><td class="oneringai-col">Built-in document entities, attachment APIs, content embeddings, and <code>memory_search_documents</code> with semantic or keyword retrieval. It is not a general-purpose loader/chunker RAG pipeline.</td><td>Document loaders + vector stores + retrievers</td><td>Knowledge class with RAG pipeline (ChromaDB, Qdrant, 15+ embedding providers)</td><td>Wiki + knowledge plugins</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -288,14 +287,14 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Built-in tools</td><td class="oneringai-col">60+ (18 categories: filesystem, shell, web, desktop, multimedia, code, JSON, connector&hellip;)</td><td>50+ via integrations</td><td>70+ via crewai-tools (search, scrape, docs, databases, vector DBs, media)</td><td>60 bundled + 5,400 on ClawHub</td></tr>
+                                <tr><td>Built-in tools</td><td class="oneringai-col">39 connector-free generated tools across 8 categories. Connector, context-plugin, memory, orchestrator, and MCP tools are discovered dynamically.</td><td>50+ via integrations</td><td>70+ via crewai-tools (search, scrape, docs, databases, vector DBs, media)</td><td>60 bundled + 5,400 on ClawHub</td></tr>
                                 <tr><td>Per-tool circuit breakers</td><td class="oneringai-col">Yes &mdash; independent failure protection per tool</td><td>No</td><td>No</td><td>No</td></tr>
                                 <tr><td>Permission system</td><td class="oneringai-col">3-tier policy chain with 8 policies</td><td>No built-in</td><td>No built-in (guardrails = output validation, not permissions)</td><td>Exec approval pipeline</td></tr>
                                 <tr><td>Execution pipeline</td><td class="oneringai-col">Pluggable middleware: permission check &rarr; pre-execution &rarr; execution &rarr; post-execution &rarr; result normalization</td><td>ToolNode handles parallel exec + errors in LangGraph</td><td>Hooks: @before_tool_call / @after_tool_call</td><td>Plugin hooks</td></tr>
                                 <tr><td>Desktop automation</td><td class="oneringai-col">11 tools (screenshot, mouse, keyboard, window) with multimodal images (__images convention)</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
                                 <tr><td>Custom tools</td><td class="oneringai-col">Meta-tools: agent creates its own tools at runtime (custom_tool_save, _load, _draft, _test, _list, _delete)</td><td>tool() function + Zod schema</td><td>BaseTool class or @tool decorator</td><td>Skills + plugins</td></tr>
-                                <tr><td>Tool metrics</td><td class="oneringai-col">Usage count, latency, success rate per tool &mdash; no SaaS required</td><td>Via LangSmith (paid SaaS)</td><td>Via AMP (paid SaaS)</td><td>None built-in</td></tr>
-                                <tr><td>Tool namespaces</td><td class="oneringai-col">18 categories with enable/disable per namespace</td><td>No</td><td>No</td><td>Skill categories</td></tr>
+                                <tr><td>Tool metrics</td><td class="oneringai-col">Usage count, latency, success rate per tool &mdash; no SaaS required</td><td>LangSmith tracing has a free developer allocation and paid higher-volume tiers</td><td>Managed observability is available in CrewAI Enterprise</td><td>Local logs and events</td></tr>
+                                <tr><td>Tool categories</td><td class="oneringai-col">8 populated connector-free categories, plus dynamic connector categories. The catalog supports include/exclude scoping, loading, unloading, and pinned categories.</td><td>No</td><td>No</td><td>Skill categories</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -348,7 +347,7 @@
      REPORT     &rarr; Summarize, destroy agents</div>
 
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> The most nuanced built-in orchestration of any framework. Three routing modes cover every use case: quick delegation (DIRECT), interactive pair-programming sessions (DELEGATE with 3 monitoring modes and 3 reclaim conditions), and complex multi-agent projects (ORCHESTRATE with 5-phase planning). SharedWorkspace with auto-deltas gives every agent situational awareness. All non-blocking with batched async results.
+                        <strong>OneRingAI's advantage:</strong> Three routing modes cover quick delegation (DIRECT), interactive sessions (DELEGATE with monitoring and reclaim conditions), and planned multi-agent work (ORCHESTRATE). SharedWorkspace with auto-deltas keeps agents coordinated, with non-blocking execution and batched async results.
                     </div>
 
                     <!-- ============================== -->
@@ -419,8 +418,8 @@
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
                                 <tr><td>Resilience</td><td class="oneringai-col">Circuit breakers (per-connector + per-tool), retry w/ backoff + jitter, rate limiting</td><td>Basic retries; no circuit breakers</td><td>Basic retry; no circuit breakers</td><td>Provider failover</td></tr>
-                                <tr><td>Multi-tenant</td><td class="oneringai-col">userId scoping, connector allowlist, OAuth token isolation, StorageContext</td><td>Namespace-based (manual)</td><td>Not supported</td><td>Single-user only</td></tr>
-                                <tr><td>Observability</td><td class="oneringai-col">Logger + Metrics + EventEmitter on all core classes &mdash; no SaaS required</td><td>LangSmith (paid SaaS)</td><td>AMP tracing (paid, $99&ndash;$120K/yr)</td><td>Event bus</td></tr>
+                                <tr><td>Multi-tenant</td><td class="oneringai-col">userId scoping, connector allowlist, OAuth token isolation, StorageContext</td><td>Namespace-based primitives; application isolation is host-defined</td><td>Team/RBAC controls in CrewAI Enterprise; application isolation is host-defined in OSS</td><td>Designed around a single-user trust boundary</td></tr>
+                                <tr><td>Observability</td><td class="oneringai-col">Logger + Metrics + EventEmitter on all core classes &mdash; no SaaS required</td><td>LangSmith tracing has a free developer allocation and paid higher-volume tiers</td><td>Event listeners in OSS; managed tracing in CrewAI Enterprise</td><td>Event bus</td></tr>
                                 <tr><td>API stability</td><td class="oneringai-col">Semantic versioning, TypeScript strict mode</td><td>Frequent breaking changes</td><td>Memory system rewritten; some API churn</td><td>CalVer (daily releases)</td></tr>
                                 <tr><td>Tests</td><td class="oneringai-col">6,381 unit tests across 284 files, plus 21 authenticated live API checks</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
                                 <tr><td>Lifecycle hooks</td><td class="oneringai-col">turn:start, tool:executed, iteration:complete, beforeCompaction, onError</td><td>Callbacks (complex middleware)</td><td>@before_llm_call, @after_llm_call, @before_tool_call, @after_tool_call</td><td>Plugin hooks</td></tr>
@@ -442,7 +441,7 @@
                                 <tr><td>Direct LLM access</td><td class="oneringai-col">runDirect() bypasses all context for quick queries</td><td>model.invoke() (separate from agent)</td><td>Not available as agent bypass</td><td>Not applicable</td></tr>
                                 <tr><td>Streaming</td><td class="oneringai-col">13 typed event types with type guards + StreamState accumulator</td><td>streamEvents() + streamLog()</td><td>LLMStreamChunkEvent emission</td><td>Provider-based streaming</td></tr>
                                 <tr><td>Community</td><td class="oneringai-col">Growing</td><td>~17.5K stars, active</td><td>~48.7K stars, DeepLearning.AI courses</td><td>~355K stars, massive</td></tr>
-                                <tr><td>Commercial</td><td class="oneringai-col">Open source (MIT)</td><td>LangSmith (paid SaaS)</td><td>AMP ($99&ndash;$120K/yr)</td><td>Self-hosted (free, MIT)</td></tr>
+                                <tr><td>Commercial</td><td class="oneringai-col">Open source (MIT)</td><td>LangChain/LangGraph OSS; optional LangSmith managed platform</td><td>CrewAI OSS; optional CrewAI Enterprise managed platform</td><td>Self-hosted (MIT)</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -456,15 +455,15 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Dimension</th><th>OneRingAI Advantage</th><th>vs LangChain</th><th>vs CrewAI</th><th>vs OpenClaw</th></tr></thead>
                             <tbody>
-                                <tr><td>Auth</td><td class="oneringai-col">Only framework with connector-first architecture + built-in OAuth 2.0</td><td>No auth abstraction</td><td>No auth abstraction</td><td>Auth profiles, not programmatic</td></tr>
-                                <tr><td>Security</td><td class="oneringai-col">3-tier permission system with 8 policy types</td><td>No built-in security; CVEs reported</td><td>No OSS security</td><td>Tool policies, single-user only</td></tr>
-                                <tr><td>Resilience</td><td class="oneringai-col">Only framework with per-tool circuit breakers + rate limiting</td><td>No circuit breakers</td><td>No circuit breakers</td><td>No circuit breakers</td></tr>
+                                <tr><td>Auth</td><td class="oneringai-col">Connector-first architecture with built-in multi-service OAuth 2.0</td><td>Credentials per model/tool integration</td><td>Credentials per model/tool integration</td><td>Auth profiles per extension</td></tr>
+                                <tr><td>Security</td><td class="oneringai-col">3-tier permission system with 8 policy types</td><td>Guardrails, middleware, and HITL; no equivalent permission manager</td><td>Guardrails and human feedback; managed RBAC in Enterprise</td><td>Tool policy, sandbox, and exec approvals</td></tr>
+                                <tr><td>Resilience</td><td class="oneringai-col">Built-in per-tool circuit breakers + rate limiting</td><td>Retries/fallback middleware; no equivalent per-tool circuit breaker</td><td>Retries and callbacks; no equivalent per-tool circuit breaker</td><td>Provider failover and execution policy</td></tr>
                                 <tr><td>Context</td><td class="oneringai-col">Plugin-first context, pluggable compaction, unified store tools, per-plugin budgets, and a scoped entity/fact memory graph</td><td>Split memory systems, no plugin architecture</td><td>Good unified Memory but no plugin system or compaction control</td><td>Not developer-accessible</td></tr>
                                 <tr><td>Orchestration</td><td class="oneringai-col">Built-in orchestrator with 3 routing modes, 5-phase planning, interactive delegation with 3 monitoring modes, SharedWorkspace with auto-deltas</td><td>LangGraph is powerful but requires building from primitives</td><td>Crew/Flow is simpler but less nuanced</td><td>Flat subagent tree</td></tr>
                                 <tr><td>Multi-modal</td><td class="oneringai-col">Single library: text + image + video + embeddings + TTS + STT + realtime voice</td><td>Requires community packages</td><td>Minimal support</td><td>Via extensions only</td></tr>
                                 <tr><td>Desktop</td><td class="oneringai-col">Built-in computer use (11 tools)</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
                                 <tr><td>TypeScript</td><td class="oneringai-col">Full strict mode type safety</td><td>TS but heavy abstraction layers</td><td>Python-only</td><td>TS but not a developer SDK</td></tr>
-                                <tr><td>Enterprise</td><td class="oneringai-col">Multi-tenant, permissions, hooks &mdash; all built-in, no paid SaaS</td><td>Observability requires paid LangSmith</td><td>Features gated behind paid AMP</td><td>Single-user only</td></tr>
+                                <tr><td>Enterprise</td><td class="oneringai-col">Multi-tenant primitives, permissions, hooks &mdash; built into the library, no SaaS required</td><td>LangSmith offers a free developer trace allocation; paid tiers add scale and team features</td><td>Managed deployment, observability, and RBAC are available in CrewAI Enterprise</td><td>Self-hosted and designed around a single-user trust boundary</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -474,8 +473,9 @@
                         <p class="fs-6 mb-0">OneRingAI 1.0 is a stable, connector-first TypeScript foundation for production agents: current vendor APIs, lifecycle-aware model registries, auth, security, resilience, multimodal inference, realtime voice, orchestration, tools, and context management in one package. No paid SaaS required.</p>
                     </div>
 
-                    <div class="text-center mb-4">
-                        <p class="fs-7 opacity-50">OneRingAI facts verified against version 1.0.0 source and release documentation &mdash; August 2026. Competitor facts retain the comparison audit's cited baseline and should be rechecked before external publication.</p>
+                    <div class="note-callout mb-4" id="sources">
+                        <p class="fs-7 mb-1"><strong>Sources and scope &mdash; last checked 8 August 2026.</strong> OneRingAI facts are based on the 1.0.0 source and release documentation. Competitor capabilities were checked against primary documentation:</p>
+                        <p class="fs-7 mb-0"><a href="https://docs.langchain.com/oss/javascript/langchain/models">LangChain models</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/middleware/overview">middleware</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/guardrails">guardrails</a>, and <a href="https://docs.langchain.com/langsmith/billing">LangSmith billing</a>; <a href="https://docs.crewai.com/">CrewAI OSS documentation</a> and <a href="https://docs.crewai.com/enterprise/introduction">CrewAI Enterprise</a>; <a href="https://docs.openclaw.ai/tools">OpenClaw tools</a> and <a href="https://docs.openclaw.ai/tools/exec-approvals">exec approvals</a>. Counts, prices, and managed-product limits change frequently; verify them before quoting.</p>
                     </div>
 
                 </div>

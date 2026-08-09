@@ -100,6 +100,27 @@
         .uc-dark .why-callout { background: rgba(23, 141, 114, 0.15); }
         .note-callout { background: rgba(100, 100, 100, 0.06); border-left: 4px solid #999; padding: 1rem 1.5rem; border-radius: 0 0.5rem 0.5rem 0; margin: 1rem 0 2rem; font-size: 0.9rem; }
         .uc-dark .note-callout { background: rgba(255, 255, 255, 0.05); border-left-color: #666; }
+        .amos-terminal { background: #0d1513; border: 1px solid rgba(103, 232, 187, 0.2); box-shadow: 0 24px 64px rgba(4, 22, 17, 0.24); color: #d6e7e1; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .amos-terminal-bar { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        .amos-terminal-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+        .amos-terminal-line { line-height: 1.75; white-space: normal; }
+        .amos-terminal-prompt { color: #67e8bb; }
+        .amos-terminal-muted { color: #82978f; }
+        .amos-feature { background: rgba(23, 141, 114, 0.06); }
+        .uc-dark .amos-feature { background: rgba(103, 232, 187, 0.08); }
+        .amos-screenshot { background: #eef0ef; border: 1px solid rgba(103, 232, 187, 0.2); box-shadow: 0 24px 64px rgba(4, 22, 17, 0.18); }
+        .amos-screenshot img { display: block; width: 100%; height: auto; }
+        .memory-showcase { background: radial-gradient(circle at 85% 15%, rgba(103, 232, 187, 0.14), transparent 32%), linear-gradient(135deg, #10231e 0%, #0a1210 100%); color: #edf8f4; border: 1px solid rgba(103, 232, 187, 0.2); box-shadow: 0 30px 80px rgba(4, 22, 17, 0.28); }
+        .memory-feature { background: rgba(255, 255, 255, 0.055); border: 1px solid rgba(103, 232, 187, 0.14); }
+        .memory-map { background: rgba(3, 12, 10, 0.66); border: 1px solid rgba(103, 232, 187, 0.22); }
+        .memory-map svg { display: block; width: 100%; height: auto; }
+        .memory-map svg .memory-map-line { stroke: #3a7966 !important; stroke-width: 2; }
+        .memory-map svg .memory-map-node { fill: #132f27 !important; stroke: #67e8bb !important; stroke-width: 1.5; }
+        .memory-map svg .memory-map-node-secondary { fill: #17241f !important; stroke: #557269 !important; stroke-width: 1.25; }
+        .memory-map svg .memory-map-title { fill: #effaf6 !important; font-size: 15px; font-weight: 700; }
+        .memory-map svg .memory-map-type { fill: #84a79b !important; font-size: 10px; letter-spacing: 1.2px; }
+        .memory-map svg .memory-map-edge { fill: #67e8bb !important; font-size: 10px; }
+        .memory-query { background: rgba(103, 232, 187, 0.08); border: 1px solid rgba(103, 232, 187, 0.14); color: #bfd8cf; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
     </style>
 </head>
 
@@ -318,8 +339,10 @@
                             <ul class="uc-navbar-nav gap-3 d-none lg:d-flex ltr:ms-2 rtl:me-2">
                                 <li><a href="#comparison"><i class="fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>Why OneRingAI?</span></a></li>
                                 <li><a href="main/comparison.html"><i class="fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>Full Comparison</span></a></li>
-                                <li><a href="#release"><span>Version 1.0</span></a></li>
+                                <li><a href="#memory"><span>Memory</span></a></li>
+                                <li><a href="#amos"><span>AMOS</span></a></li>
                                 <li><a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md"><i class="icon unicon-cube fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>User Guide</span></a></li>
+                                <li><a href="https://github.com/aantich/oneringai/blob/main/examples/README.md"><span>Examples</span></a></li>
                             </ul>
                         </div>
                         <div class="uc-navbar-right">
@@ -461,6 +484,145 @@
             </div>
         </div>
 
+        <!-- Memory showcase start -->
+        <div id="memory" class="main-features section panel overflow-hidden">
+            <div class="section-outer panel py-4 md:py-6 xl:py-9">
+                <div class="container sm:max-w-lg xl:max-w-xl">
+                    <div class="memory-showcase section-inner panel p-4 md:p-6 xl:p-8 rounded-2">
+                        <div class="row child-cols-12 lg:child-cols-6 items-center g-5 xl:g-8">
+                            <div>
+                                <div class="panel vstack gap-3" data-anime="onview: -150; targets: >*; translateY: [32, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(90);">
+                                    <div><span class="fs-7 fw-bold py-narrow px-2 border rounded-pill text-tertiary">A first-class subsystem</span></div>
+                                    <h2 class="h3 lg:h2 m-0 text-white">Memory that understands <span class="px-1 bg-tertiary text-primary">relationships</span>, not just messages</h2>
+                                    <p class="fs-6 xl:fs-4 opacity-80 m-0">OneRingAI includes a standalone entity-and-fact memory system with graph traversal, vector embeddings, ranked recall, document search, signal ingestion, evolving profiles, and production-grade permissions.</p>
+                                    <div class="row child-cols-12 sm:child-cols-6 g-2 mt-1">
+                                        <div><div class="memory-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Graph-native knowledge</strong><span class="fs-7 opacity-70">People, organizations, tasks, events, documents, and typed relationships with provenance.</span></div></div>
+                                        <div><div class="memory-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Vector + ranked retrieval</strong><span class="fs-7 opacity-70">Semantic search, N-hop traversal, confidence, recency, importance, and as-of queries.</span></div></div>
+                                        <div><div class="memory-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Learns from signals</strong><span class="fs-7 opacity-70">Turn text, email, calendars, or conversations into resolved entities, facts, and profiles.</span></div></div>
+                                        <div><div class="memory-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Standalone or agent-ready</strong><span class="fs-7 opacity-70">Use MemorySystem directly or add safe read/write tools and context injection to any agent.</span></div></div>
+                                    </div>
+                                    <div class="vstack sm:hstack gap-2 mt-2">
+                                        <a href="https://github.com/aantich/oneringai/blob/main/docs/MEMORY_GUIDE.md" class="btn btn-md btn-primary text-tertiary px-3 lg:px-4 fw-bold">Explore the memory system</a>
+                                        <a href="https://github.com/aantich/oneringai/blob/main/docs/MEMORY_API.md" class="btn btn-md bg-white text-dark px-3 lg:px-4 fw-bold">API reference</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="memory-map rounded-1-5 p-3 sm:p-4" data-anime="onview: -150; translateX: [32, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 650; delay: 150;">
+                                    <div class="hstack justify-between gap-2 mb-2">
+                                        <span class="fs-7 fw-bold text-tertiary">KNOWLEDGE GRAPH</span>
+                                        <span class="fs-8 opacity-50">entities · facts · embeddings</span>
+                                    </div>
+                                    <svg viewBox="0 0 520 340" role="img" aria-labelledby="memory-graph-title memory-graph-desc">
+                                        <title id="memory-graph-title">Example OneRingAI memory graph</title>
+                                        <desc id="memory-graph-desc">A person connected to an organization, priority, event, and document through typed facts.</desc>
+                                        <line class="memory-map-line" x1="260" y1="168" x2="125" y2="72"></line>
+                                        <line class="memory-map-line" x1="260" y1="168" x2="396" y2="72"></line>
+                                        <line class="memory-map-line" x1="260" y1="168" x2="125" y2="274"></line>
+                                        <line class="memory-map-line" x1="260" y1="168" x2="396" y2="274"></line>
+                                        <text class="memory-map-edge" x="164" y="112">works_at</text>
+                                        <text class="memory-map-edge" x="326" y="112">tracks_priority</text>
+                                        <text class="memory-map-edge" x="158" y="230">attended</text>
+                                        <text class="memory-map-edge" x="326" y="230">has_document</text>
+
+                                        <rect class="memory-map-node" x="192" y="130" rx="12" width="136" height="76"></rect>
+                                        <text class="memory-map-type" x="260" y="157" text-anchor="middle">PERSON</text>
+                                        <text class="memory-map-title" x="260" y="183" text-anchor="middle">Alice Chen</text>
+
+                                        <rect class="memory-map-node-secondary" x="58" y="36" rx="10" width="134" height="66"></rect>
+                                        <text class="memory-map-type" x="125" y="61" text-anchor="middle">ORGANIZATION</text>
+                                        <text class="memory-map-title" x="125" y="83" text-anchor="middle">Acme</text>
+
+                                        <rect class="memory-map-node-secondary" x="328" y="36" rx="10" width="136" height="66"></rect>
+                                        <text class="memory-map-type" x="396" y="61" text-anchor="middle">PRIORITY</text>
+                                        <text class="memory-map-title" x="396" y="83" text-anchor="middle">Ship Launch</text>
+
+                                        <rect class="memory-map-node-secondary" x="58" y="240" rx="10" width="134" height="66"></rect>
+                                        <text class="memory-map-type" x="125" y="265" text-anchor="middle">EVENT</text>
+                                        <text class="memory-map-title" x="125" y="287" text-anchor="middle">Q3 Planning</text>
+
+                                        <rect class="memory-map-node-secondary" x="328" y="240" rx="10" width="136" height="66"></rect>
+                                        <text class="memory-map-type" x="396" y="265" text-anchor="middle">DOCUMENT</text>
+                                        <text class="memory-map-title" x="396" y="287" text-anchor="middle">Launch Brief</text>
+                                    </svg>
+                                    <div class="memory-query rounded p-2 fs-8 mt-2"><span class="text-tertiary">memory_search</span>({ query: "What matters for the launch?" }) → ranked facts + related entities</div>
+                                    <div class="hstack flex-wrap gap-1 mt-2 fs-8 opacity-60">
+                                        <span class="border rounded-pill px-1">Mongo + Atlas</span>
+                                        <span class="border rounded-pill px-1">bitemporal</span>
+                                        <span class="border rounded-pill px-1">principal ACLs</span>
+                                        <span class="border rounded-pill px-1">6 read + 6 write tools</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Memory showcase end -->
+
+        <!-- AMOS showcase start -->
+        <div id="amos" class="main-features section panel overflow-hidden">
+            <div class="section-outer panel py-4 md:py-6 xl:py-9">
+                <div class="container sm:max-w-lg xl:max-w-xl">
+                    <div class="section-inner panel p-4 md:p-6 xl:p-8 border rounded-2 bg-white dark:bg-gray-900">
+                        <div class="row child-cols-12 lg:child-cols-6 items-center g-5 xl:g-8">
+                            <div>
+                                <div class="panel vstack gap-3" data-anime="onview: -150; targets: >*; translateY: [32, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(90);">
+                                    <div>
+                                        <span class="fs-7 fw-bold py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Built with OneRingAI</span>
+                                    </div>
+                                    <h2 class="h3 lg:h2 m-0">Meet <span class="px-1 bg-tertiary text-primary">AMOS</span>, your terminal AI agent</h2>
+                                    <p class="fs-6 xl:fs-4 opacity-80 m-0">AMOS is the working CLI application inside the OneRingAI repository. It shows how connectors, agents, tools, permissions, context, and persistence fit together in a useful product—not just an isolated snippet.</p>
+                                    <div class="row child-cols-12 sm:child-cols-6 g-2 mt-1">
+                                        <div><div class="amos-feature p-3 rounded h-100"><strong class="d-block mb-narrow">Switch providers live</strong><span class="fs-7 opacity-70">Change connector, vendor, or model without rewriting agent logic.</span></div></div>
+                                        <div><div class="amos-feature p-3 rounded h-100"><strong class="d-block mb-narrow">Code with guardrails</strong><span class="fs-7 opacity-70">Use filesystem and shell tools with explicit execution permissions.</span></div></div>
+                                        <div><div class="amos-feature p-3 rounded h-100"><strong class="d-block mb-narrow">Research the web</strong><span class="fs-7 opacity-70">Search through Serper and scrape pages through ZenRows connectors.</span></div></div>
+                                        <div><div class="amos-feature p-3 rounded h-100"><strong class="d-block mb-narrow">Keep your place</strong><span class="fs-7 opacity-70">Inspect context usage, then save and resume working sessions.</span></div></div>
+                                    </div>
+                                    <div class="vstack sm:hstack gap-2 mt-2">
+                                        <a href="https://github.com/aantich/oneringai/blob/main/apps/amos/README.md" class="btn btn-md btn-primary text-tertiary px-3 lg:px-4 fw-bold">Read the AMOS guide</a>
+                                        <a href="https://github.com/aantich/oneringai/tree/main/apps/amos" class="btn btn-md btn-alt-dark border-dark px-3 lg:px-4 fw-bold">Browse the source</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="amos-terminal rounded-1-5 overflow-hidden" data-anime="onview: -150; translateX: [32, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 650; delay: 150;">
+                                    <div class="amos-terminal-bar hstack gap-narrow p-3">
+                                        <span class="amos-terminal-dot bg-red-500"></span>
+                                        <span class="amos-terminal-dot bg-yellow-500"></span>
+                                        <span class="amos-terminal-dot bg-green-500"></span>
+                                        <span class="fs-8 amos-terminal-muted ltr:ms-1 rtl:me-1">amos — terminal agent</span>
+                                    </div>
+                                    <div class="p-3 sm:p-4 fs-7 sm:fs-6">
+                                        <div class="amos-terminal-line"><span class="amos-terminal-prompt">$</span> cd apps/amos</div>
+                                        <div class="amos-terminal-line"><span class="amos-terminal-prompt">$</span> npm run dev</div>
+                                        <div class="amos-terminal-line amos-terminal-muted">AMOS ready · connector: openai-main</div>
+                                        <br>
+                                        <div class="amos-terminal-line"><span class="amos-terminal-prompt">›</span> /prompt use coding-agent</div>
+                                        <div class="amos-terminal-line amos-terminal-muted">Prompt switched to coding-agent</div>
+                                        <div class="amos-terminal-line"><span class="amos-terminal-prompt">›</span> /external setup search</div>
+                                        <div class="amos-terminal-line amos-terminal-muted">Serper search connected</div>
+                                        <div class="amos-terminal-line"><span class="amos-terminal-prompt">›</span> /context budget</div>
+                                        <div class="amos-terminal-line amos-terminal-muted">Context healthy · tools ready</div>
+                                        <div class="amos-terminal-line"><span class="amos-terminal-prompt">›</span> /session save launch-research</div>
+                                        <div class="amos-terminal-line amos-terminal-muted">Session saved</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <figure class="panel mt-5 xl:mt-7 mb-0">
+                            <a href="assets/images/screenshots/amos-terminal.png" target="_blank" rel="noopener" class="amos-screenshot d-block rounded-1-5 overflow-hidden">
+                                <img src="assets/images/screenshots/amos-terminal.png" width="2608" height="1090" loading="lazy" alt="AMOS running in a terminal with the OpenAI connector and coding-agent prompt">
+                            </a>
+                            <figcaption class="fs-7 opacity-60 text-center mt-2">AMOS running from <code>apps/amos</code> with an OpenAI connector. Open the screenshot to view it full size.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- AMOS showcase end -->
+
         <!-- Section start -->
         <div id="companies_sponsores" class="companies-sponsores section panel overflow-hidden">
             <div class="section-outer panel">
@@ -469,7 +631,7 @@
                     <div class="section-inner panel">
                         
                         <div class="brands panel vstack gap-3 sm:gap-4 xl:gap-5 text-center" data-anime="onview: -200; translateY: [-16, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: 350;">
-                            <p class="fs-6">50 connector templates out of the box, plus a generic API connector for everything else</p>
+                            <p class="fs-6">50 authentication templates, generic authenticated API access for every configured service, and specialized tool bundles for selected connectors</p>
                             <div class="panel">
                                 <div class="element-brands text-gray-900 dark:text-white mask-x">
                                     <div class="swiper" data-uc-swiper="items: 2.25; center: true; center-bounds: true; autoplay: 7000; loop: true; speed: 7000; autoplay-delay: -1; allowTouchMove: false; disableOnInteraction: true;" data-uc-swiper-s="items: 4; center: false; center-bounds: false;" data-uc-swiper-m="items: 6; gap: 100;">
@@ -1298,8 +1460,8 @@
                                     </div>
                                     <div class="panel">
                                         <div class="vstack gap-1">
-                                            <h3 class="title h6 m-0">Context and self-learning memory</h3>
-                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Plugin-first context, safe compaction, in-context state, graph memory, semantic recall, scoped permissions, profiles, and background ingestion.</p>
+                                            <h3 class="title h6 m-0">Plugin-first context and memory</h3>
+                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Feature-flagged plugins assemble instructions, state, tools, persisted stores, compaction, and self-learning graph memory into one token-budgeted context. <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#context-management" class="uc-link text-tertiary">Context guide</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -1311,8 +1473,8 @@
                                     </div>
                                     <div class="panel">
                                         <div class="vstack gap-1">
-                                            <h3 class="title h6 m-0">Integrations with All Systems</h3>
-                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Start from 50 authentication templates or use the generic connector path for any other service. Multiple named accounts per vendor are first-class.</p>
+                                            <h3 class="title h6 m-0">Connectors for every system</h3>
+                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Start from 50 authentication templates. Every configured service gets generic authenticated API access; selected services add specialized tool bundles. <a href="https://github.com/aantich/oneringai/blob/main/docs/CONNECTOR_TOOL_CATALOG.md" class="uc-link text-tertiary">Connector catalog</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -1325,7 +1487,7 @@
                                     <div class="panel">
                                         <div class="vstack gap-1">
                                             <h3 class="title h6 m-0">Tools, permissions, and orchestration</h3>
-                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Build with extensible tools, three-tier permissions, per-tool circuit breakers, MCP, reusable workflows, and coordinated multi-agent teams.</p>
+                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Start with 39 connector-free tools in eight categories, then add connector, context-plugin, memory, orchestrator, and MCP tools dynamically. <a href="https://github.com/aantich/oneringai/blob/main/docs/CONNECTOR_TOOL_CATALOG.md#generated-connector-free-built-ins" class="uc-link text-tertiary">Tool catalog</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -1854,17 +2016,17 @@
                                     <td>Self-hosted product</td>
                                 </tr>
                                 <tr>
-                                    <td>Learning curve</td>
-                                    <td class="oneringai-col">Low &mdash; single Agent.create() entry point</td>
-                                    <td>High &mdash; devs report "digging deep into source code" for simple tasks</td>
-                                    <td>Low &mdash; role/goal/backstory metaphor is very intuitive</td>
-                                    <td>Low &mdash; install and run</td>
+                                    <td>Setup surface</td>
+                                    <td class="oneringai-col">Single Agent.create() entry point</td>
+                                    <td>Models, agents, middleware, tools, and LangGraph primitives</td>
+                                    <td>Role/goal/backstory agents, tasks, crews, and flows</td>
+                                    <td>Install, configure channels, and run</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> Single-library, minimal-dependency design avoids the "abstraction maze" that has plagued LangChain. Developers report <strong>40% performance improvement</strong> when switching from LangChain's Runnable layers to direct SDK calls &mdash; OneRingAI's thin abstraction gives you that performance without losing the framework benefits.
+                        <strong>OneRingAI's advantage:</strong> A compact, single-package TypeScript surface keeps the common path at Connector &rarr; Agent &rarr; Provider. Runtime performance depends on the workload and provider, so benchmark your own use case rather than relying on framework-wide percentage claims.
                     </div>
 
                     <!-- 2. Multi-Vendor LLM Support -->
@@ -1910,6 +2072,13 @@
                                     <td>Auth profile rotation with failover</td>
                                 </tr>
                                 <tr>
+                                    <td>Vendor switching</td>
+                                    <td class="oneringai-col">Change <code>connector</code> and <code>model</code>; prompts, tools, memory, and agent logic stay unchanged</td>
+                                    <td>Change model integration and provider-specific config</td>
+                                    <td>Change LLM/model config</td>
+                                    <td>Change extension config</td>
+                                </tr>
+                                <tr>
                                     <td>Thinking / reasoning</td>
                                     <td class="oneringai-col">Vendor-agnostic config &mdash; maps to Anthropic budgets, OpenAI effort, Google thinkingLevel</td>
                                     <td>Per-provider configuration</td>
@@ -1940,27 +2109,27 @@
                                 <tr>
                                     <td>Auth model</td>
                                     <td class="oneringai-col">Centralized Connector registry (single source of truth)</td>
-                                    <td>No auth abstraction &mdash; each integration has own auth</td>
-                                    <td>Env vars or LiteLLM config</td>
+                                    <td>Credentials configured per model or tool integration; no shared connector registry equivalent</td>
+                                    <td>Credentials configured per model or tool integration, commonly through environment or config</td>
                                     <td>Auth profiles per extension</td>
                                 </tr>
                                 <tr>
                                     <td>OAuth 2.0</td>
-                                    <td class="oneringai-col">Built-in: 4 flows (PKCE, Client Credentials, JWT Bearer, Static Token), AES-256-GCM encrypted storage</td>
-                                    <td>Not built-in</td>
-                                    <td>Not built-in</td>
-                                    <td>Not built-in</td>
+                                    <td class="oneringai-col">Built-in OAuth flows, AES-256-GCM encrypted storage, refresh-strategy enforcement, and 50 vendor templates</td>
+                                    <td>No framework-level multi-service OAuth registry</td>
+                                    <td>No framework-level multi-service OAuth registry</td>
+                                    <td>Extension-specific authentication</td>
                                 </tr>
                                 <tr>
                                     <td>Multi-user isolation</td>
                                     <td class="oneringai-col">userId + accountId scoping, connector allowlist per agent</td>
-                                    <td>Manual implementation</td>
-                                    <td>Not supported</td>
-                                    <td>Single-user trust model</td>
+                                    <td>Implemented by the host application</td>
+                                    <td>Managed team controls in CrewAI Enterprise; application scoping remains host-defined in OSS</td>
+                                    <td>Designed around a single-user trust boundary</td>
                                 </tr>
                                 <tr>
                                     <td>External API tools</td>
-                                    <td class="oneringai-col">ConnectorTools.for('github') &mdash; auto-generates API tools from 50 service templates, plus custom services</td>
+                                    <td class="oneringai-col"><code>ConnectorTools.for('work-github')</code> adds generic authenticated API access plus GitHub's specialized bundle. The catalog covers 50 auth templates, selected specialized bundles, and custom services.</td>
                                     <td>Community tool packages</td>
                                     <td>Via Composio (external)</td>
                                     <td>5,400+ skills on ClawHub</td>
@@ -1969,7 +2138,7 @@
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> Authentication is the hardest production problem. OneRingAI is the <strong>only framework</strong> with connector-first design &mdash; a typed registry with built-in OAuth, encrypted storage, multi-user isolation, and per-connector resilience. No other framework even has an auth abstraction.
+                        <strong>OneRingAI's advantage:</strong> The Connector API combines provider credentials, multi-service OAuth, encrypted storage, multi-user scoping, and per-connector resilience behind one typed registry. Other frameworks generally configure credentials at the model, tool, extension, or host-application layer.
                     </div>
 
                     <!-- 4. Security & Permissions -->
@@ -1989,23 +2158,23 @@
                                 <tr>
                                     <td>Permission system</td>
                                     <td class="oneringai-col">3-tier: user rules &rarr; delegation hierarchy &rarr; 8-policy chain</td>
-                                    <td>None built-in</td>
-                                    <td>None in OSS (RBAC in paid AMP only)</td>
-                                    <td>Tool policy pipeline</td>
+                                    <td>Guardrails and middleware; no equivalent 3-tier permission-policy manager</td>
+                                    <td>Task guardrails and human feedback; RBAC is part of CrewAI Enterprise</td>
+                                    <td>Tool policy pipeline with exec approvals</td>
                                 </tr>
                                 <tr>
                                     <td>Tool-level scoping</td>
                                     <td class="oneringai-col">Per-tool: always / session / once / never</td>
-                                    <td>None</td>
-                                    <td>None</td>
+                                    <td>Human-in-the-loop middleware can gate selected tools</td>
+                                    <td>Human feedback can gate workflow steps</td>
                                     <td>Exec approval per command</td>
                                 </tr>
                                 <tr>
                                     <td>Built-in policies</td>
                                     <td class="oneringai-col">Allowlist, Blocklist, RateLimit, PathRestriction, BashFilter, SessionApproval, Role, UrlAllowlist</td>
-                                    <td>None</td>
-                                    <td>None</td>
-                                    <td>Path + filesystem policies</td>
+                                    <td>PII detection, human-in-the-loop, model/tool call limits, and custom middleware</td>
+                                    <td>Task guardrails, callbacks, and human feedback</td>
+                                    <td>Tool allow/deny policy, sandboxing, and exec approvals</td>
                                 </tr>
                                 <tr>
                                     <td>Circuit breakers</td>
@@ -2017,22 +2186,15 @@
                                 <tr>
                                     <td>Audit trail</td>
                                     <td class="oneringai-col">Event-based: permission:allow, permission:deny, permission:audit</td>
-                                    <td>None</td>
-                                    <td>91 event types (observability)</td>
-                                    <td>Mutation tracking</td>
-                                </tr>
-                                <tr>
-                                    <td>Known CVEs</td>
-                                    <td class="oneringai-col">None reported</td>
-                                    <td>CVE-2025-68664/68665 (CVSS 8.6)</td>
-                                    <td>None reported</td>
-                                    <td>None reported</td>
+                                    <td>LangSmith tracing or custom logging middleware</td>
+                                    <td>Event listeners in OSS; managed traces in CrewAI Enterprise</td>
+                                    <td>Mutation tracking and approval events</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> The most complete security model of any AI agent framework. 3-tier permission evaluation with 8 policy types, per-tool circuit breakers, rate limiting, and bash filtering. LangChain and CrewAI have <strong>no built-in security whatsoever</strong>.
+                        <strong>OneRingAI's advantage:</strong> Its security controls are packaged as a cohesive library layer: 3-tier permission evaluation, 8 policy types, per-tool circuit breakers, rate limiting, and bash filtering. LangChain, CrewAI, and OpenClaw also provide guardrails or approval controls, but with different scopes and deployment models.
                     </div>
 
                     <!-- 5. Context Management -->
@@ -2095,7 +2257,7 @@
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> Plugin-based context system is architecturally unique. InContextMemory puts frequently-accessed state directly in the prompt &mdash; no retrieval needed. Per-plugin token budgets give exact breakdowns.
+                        <strong>OneRingAI's advantage:</strong> Its plugin-based context system keeps frequently accessed InContextMemory directly in the prompt, with per-plugin token budgets for an exact breakdown. Custom plugins and store handlers use the same lifecycle.
                     </div>
 
                     <!-- 6. Tool System -->
@@ -2114,7 +2276,7 @@
                             <tbody>
                                 <tr>
                                     <td>Built-in tools</td>
-                                    <td class="oneringai-col">60+ (18 categories: filesystem, shell, web, desktop, multimedia, code, JSON, connector&hellip;)</td>
+                                    <td class="oneringai-col">39 connector-free generated tools across 8 categories. Connector, context-plugin, memory, orchestrator, and MCP tools are discovered dynamically.</td>
                                     <td>50+ via integrations</td>
                                     <td>70+ via crewai-tools</td>
                                     <td>60 bundled + 5,400 on ClawHub</td>
@@ -2150,9 +2312,9 @@
                                 <tr>
                                     <td>Tool metrics</td>
                                     <td class="oneringai-col">Usage count, latency, success rate &mdash; no SaaS required</td>
-                                    <td>Via LangSmith (paid)</td>
-                                    <td>Via AMP (paid)</td>
-                                    <td>None built-in</td>
+                                    <td>LangSmith tracing has a free developer allocation and paid higher-volume tiers</td>
+                                    <td>Managed observability is available in CrewAI Enterprise</td>
+                                    <td>Local logs and events</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -2214,7 +2376,7 @@
                         </table>
                     </div>
                     <div class="why-callout">
-                        <strong>Why OneRingAI wins:</strong> Most nuanced orchestration control with 3 routing modes, interactive delegation with monitoring, and a structured planning phase. SharedWorkspace gives agents a versioned bulletin board for coordination.
+                        <strong>OneRingAI's advantage:</strong> Three routing modes combine direct assignment, interactive delegation with monitoring, and a structured planning phase. SharedWorkspace gives agents a versioned bulletin board for coordination.
                     </div>
 
                     <!-- 8. Multi-Modal Support -->
@@ -2332,15 +2494,15 @@
                                 <tr>
                                     <td>Multi-tenant</td>
                                     <td class="oneringai-col">userId scoping, connector allowlist, OAuth token isolation, StorageContext</td>
-                                    <td>Namespace-based (manual)</td>
-                                    <td>Not supported</td>
-                                    <td>Single-user only</td>
+                                    <td>Namespace-based primitives; application isolation is host-defined</td>
+                                    <td>Team/RBAC controls in CrewAI Enterprise; application isolation is host-defined in OSS</td>
+                                    <td>Designed around a single-user trust boundary</td>
                                 </tr>
                                 <tr>
                                     <td>Observability</td>
                                     <td class="oneringai-col">Logger + Metrics + EventEmitter &mdash; no SaaS required</td>
-                                    <td>LangSmith (paid SaaS)</td>
-                                    <td>AMP tracing (paid, $99&ndash;$120K/yr)</td>
+                                    <td>LangSmith tracing has a free developer allocation and paid higher-volume tiers</td>
+                                    <td>Event listeners in OSS; managed tracing in CrewAI Enterprise</td>
                                     <td>Event bus</td>
                                 </tr>
                                 <tr>
@@ -2377,24 +2539,24 @@
                             <tbody>
                                 <tr>
                                     <td>Auth</td>
-                                    <td class="oneringai-col">Only framework with connector-first architecture + built-in OAuth 2.0</td>
-                                    <td>No auth abstraction</td>
-                                    <td>No auth abstraction</td>
-                                    <td>Auth profiles, not programmatic</td>
+                                    <td class="oneringai-col">Connector-first architecture with built-in multi-service OAuth 2.0</td>
+                                    <td>Credentials per model/tool integration</td>
+                                    <td>Credentials per model/tool integration</td>
+                                    <td>Auth profiles per extension</td>
                                 </tr>
                                 <tr>
                                     <td>Security</td>
                                     <td class="oneringai-col">3-tier permission system with 8 policy types</td>
-                                    <td>No built-in security; CVEs reported</td>
-                                    <td>No OSS security</td>
-                                    <td>Tool policies, single-user only</td>
+                                    <td>Guardrails, middleware, and HITL; no equivalent permission manager</td>
+                                    <td>Guardrails and human feedback; managed RBAC in Enterprise</td>
+                                    <td>Tool policy, sandbox, and exec approvals</td>
                                 </tr>
                                 <tr>
                                     <td>Resilience</td>
-                                    <td class="oneringai-col">Only framework with per-tool circuit breakers + rate limiting</td>
-                                    <td>No circuit breakers</td>
-                                    <td>No circuit breakers</td>
-                                    <td>No circuit breakers</td>
+                                    <td class="oneringai-col">Built-in per-tool circuit breakers + rate limiting</td>
+                                    <td>Retries/fallback middleware; no equivalent per-tool circuit breaker</td>
+                                    <td>Retries and callbacks; no equivalent per-tool circuit breaker</td>
+                                    <td>Provider failover and execution policy</td>
                                 </tr>
                                 <tr>
                                     <td>Context</td>
@@ -2426,10 +2588,10 @@
                                 </tr>
                                 <tr>
                                     <td>Enterprise</td>
-                                    <td class="oneringai-col">Multi-tenant, permissions, hooks &mdash; all built-in, no paid SaaS</td>
-                                    <td>Observability requires paid LangSmith</td>
-                                    <td>Features gated behind paid AMP</td>
-                                    <td>Single-user only</td>
+                                    <td class="oneringai-col">Multi-tenant primitives, permissions, hooks &mdash; built into the library, no SaaS required</td>
+                                    <td>LangSmith offers a free developer trace allocation; paid tiers add scale and team features</td>
+                                    <td>Managed deployment, observability, and RBAC are available in CrewAI Enterprise</td>
+                                    <td>Self-hosted and designed around a single-user trust boundary</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -2438,6 +2600,11 @@
                     <!-- Closing -->
                     <div class="why-callout mt-4 mb-6">
                         <p class="fs-6 mb-0">OneRingAI 1.0 is a stable, connector-first TypeScript foundation for production agents: current vendor APIs, lifecycle-aware model registries, auth, security, resilience, multimodal inference, realtime voice, orchestration, tools, and context management in one package. No paid SaaS required.</p>
+                    </div>
+
+                    <div class="note-callout mb-4" id="comparison-sources">
+                        <p class="fs-7 mb-1"><strong>Sources and scope &mdash; last checked 8 August 2026.</strong> OneRingAI facts are based on the 1.0.0 source and release documentation. Competitor capabilities were checked against primary documentation:</p>
+                        <p class="fs-7 mb-0"><a href="https://docs.langchain.com/oss/javascript/langchain/models">LangChain models</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/middleware/overview">middleware</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/guardrails">guardrails</a>, and <a href="https://docs.langchain.com/langsmith/billing">LangSmith billing</a>; <a href="https://docs.crewai.com/">CrewAI OSS documentation</a> and <a href="https://docs.crewai.com/enterprise/introduction">CrewAI Enterprise</a>; <a href="https://docs.openclaw.ai/tools">OpenClaw tools</a> and <a href="https://docs.openclaw.ai/tools/exec-approvals">exec approvals</a>. Counts, prices, and managed-product limits change frequently; verify them before quoting.</p>
                     </div>
 
                 </div>
@@ -2519,6 +2686,9 @@
                         <div class="uc-footer-bottom panel vstack md:hstack gap-2 justify-between items-center text-center pt-4 lg:pt-6 border-top dark:text-white">
                             <p>OneRingAI © 2025-2026, All rights reserved.</p>
                             <ul class="nav-x gap-1">
+                                <li><a href="https://github.com/aantich/oneringai/blob/main/docs/MEMORY_GUIDE.md">Memory</a></li>
+                                <li><a href="https://github.com/aantich/oneringai/blob/main/apps/amos/README.md">AMOS</a></li>
+                                <li><a href="https://github.com/aantich/oneringai/blob/main/examples/README.md">Examples</a></li>
                                 <li><a href="https://everworker.ai">Proudly sponsored by Everworker.ai</a></li>                                                                
                                 <li><a href="https://x.com/aantich" class="btn btn-sm btn-primary text-tertiary dark:bg-tertiary dark:text-primary p-0 w-32px h-32px rounded-circle"><i class="icon icon-1 unicon-logo-x-filled"></i></a></li>
                             </ul>
