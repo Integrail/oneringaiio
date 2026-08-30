@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneRingAI vs LangChain vs CrewAI vs OpenClaw - Full Comparison</title>
-    <meta name="description" content="OneRingAI feature comparison covering architecture, registry v2, current vendor APIs, realtime voice, security, tools, orchestration, context, and multimodal inference.">
-    <meta name="keywords" content="oneringai, crewai, langchain, openclaw, ai framework comparison, agent framework, typescript ai, llm framework">
+    <meta name="description" content="OneRingAI feature comparison covering connector-first Agents, complete agent runtimes, distributed execution, registry v2, realtime voice, security, tools, memory, and multimodal inference.">
+    <meta name="keywords" content="oneringai, crewai, langchain, openclaw, ai framework comparison, agent runtime, distributed agents, typescript ai, llm framework">
     <meta name="theme-color" content="#178d72">
 
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="OneRingAI vs LangChain vs CrewAI vs OpenClaw &mdash; Full Comparison" />
-    <meta property="og:description" content="Current OneRingAI comparison: registry v2, current vendor APIs, realtime voice, multimodal inference, security, tools, orchestration, and context." />
+    <meta property="og:description" content="Current OneRingAI comparison: connector-first Agents, complete agent runtimes, portable execution, registry v2, realtime voice, multimodal inference, security, tools, orchestration, and context." />
 
     <link rel="preload" href="../assets/css/fonts.css" as="style">
     <link rel="preload" href="../assets/css/unicons.min.css" as="style">
@@ -89,11 +89,11 @@
                         <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Current release comparison</span>
                         <h1 class="h2 lg:h1 mt-2 mb-1">OneRingAI vs LangChain vs CrewAI vs OpenClaw</h1>
                         <p class="fs-5 opacity-70">Comprehensive Feature Comparison &mdash; August 2026</p>
-                        <p class="fs-6 mt-2 mx-auto" style="max-width: 800px;">An in-depth, source-code-level analysis of four AI agent frameworks, covering OneRingAI's stable connector-first API, registry schema v2, current model families, and realtime voice support.</p>
+                        <p class="fs-6 mt-2 mx-auto" style="max-width: 800px;">An in-depth, source-code-level analysis of four AI agent frameworks, covering OneRingAI's connector-first native Agent API, optional complete-agent runtime, portable execution, registry schema v2, and Agent-aware realtime voice.</p>
                     </div>
 
                     <div class="why-callout">
-                        <strong>Current OneRingAI release:</strong> Node.js 22+, 88 text/realtime registry records, dedicated image/video/voice/embedding registries, current OpenAI/Anthropic/Google/xAI APIs, status-safe Interactions streams, provider-specific Realtime audio types, bounded external media, 6,381 passing unit tests across 284 files, and 21 authenticated live API checks. Read the <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md">User Guide</a>, <a href="https://github.com/aantich/oneringai/blob/main/docs/MODEL_REGISTRY_AUDIT.md">model audit</a>, or <a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md">changelog</a>.
+                        <strong>Current OneRingAI release: 1.1.3.</strong> Node.js 22.13+ or 24+, 95 text/realtime registry records and dedicated media registries, a vendor-neutral Agent Runtime for native OneRingAI and Codex SDK agents, portable protocol-v2 Agent packages, Agent-aware Realtime sessions, semantic context rollover, rotating host credentials, and 6,500+ unit tests across 300+ files. Read the <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#agent-runtime-preview">Agent Runtime guide</a>, <a href="https://github.com/aantich/oneringai/blob/main/docs/designs/DISTRIBUTED_AGENT_EXECUTION.md">distributed execution design</a>, or <a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#113--2026-08-30">1.1.3 changelog</a>.
                     </div>
 
                     <div class="note-callout">
@@ -113,7 +113,7 @@
                             <li><a href="#s7">7. Multi-Agent Orchestration</a></li>
                             <li><a href="#s8">8. Multi-Modal Support</a></li>
                             <li><a href="#s9">9. MCP Integration</a></li>
-                            <li><a href="#s10">10. Session &amp; Storage</a></li>
+                            <li><a href="#s10">10. Agent Runtime, Sessions &amp; Storage</a></li>
                             <li><a href="#s11">11. Resilience &amp; Production</a></li>
                             <li><a href="#s12">12. Developer Experience</a></li>
                             <li><a href="#s13">13. Summary</a></li>
@@ -131,11 +131,12 @@
                             <tbody>
                                 <tr><td>Core paradigm</td><td class="oneringai-col">Connector-first (auth registry &rarr; agent &rarr; provider)</td><td>Runnable composition (LCEL) &rarr; Graph nodes</td><td>Role-based agent crews + event-driven flows</td><td>Gateway &rarr; channels &rarr; skills</td></tr>
                                 <tr><td>Language</td><td class="oneringai-col">TypeScript (strict)</td><td>TypeScript (primary), Python (separate repo)</td><td>Python only</td><td>TypeScript</td></tr>
-                                <tr><td>Codebase</td><td class="oneringai-col">~109K LOC / 20 deps / single package</td><td>~200K+ LOC / 15+ packages (monorepo)</td><td>~100K LOC / 33 deps</td><td>~300K+ LOC / extensions</td></tr>
+                                <tr><td>Codebase</td><td class="oneringai-col">~165K source LOC / 23 direct runtime deps / single package</td><td>~200K+ LOC / 15+ packages (monorepo)</td><td>~100K LOC / 33 deps</td><td>~300K+ LOC / extensions</td></tr>
                                 <tr><td>Type</td><td class="oneringai-col">Developer SDK / library</td><td>Developer SDK / framework</td><td>Developer framework</td><td>Self-hosted product</td></tr>
-                                <tr><td>Abstraction layers</td><td class="oneringai-col">1 (Connector &rarr; Agent &rarr; Provider)</td><td>4+ (Runnables, Chains, Agents, Callbacks, Tools, Graph)</td><td>3 (Agents, Tasks, Crews + Flows)</td><td>3 (Gateway, Channels, Skills/Plugins)</td></tr>
-                                <tr><td>Setup surface</td><td class="oneringai-col">Single Agent.create() entry point</td><td>Models, agents, middleware, tools, and LangGraph primitives</td><td>Role/goal/backstory agents, tasks, crews, and flows</td><td>Install, configure channels, and run</td></tr>
-                                <tr><td>Runtime</td><td class="oneringai-col">Node.js 22+, ESM and CJS builds</td><td>Node.js 20+, Cloudflare Workers, Vercel Edge, Deno, Bun</td><td>Python 3.10&ndash;3.13</td><td>Node.js 22+</td></tr>
+                                <tr><td>Execution surfaces</td><td class="oneringai-col">Direct: Connector &rarr; Agent &rarr; Provider. Optional: Application &rarr; Agent Runtime &rarr; native agent driver.</td><td>Runnables, Chains, Agents, Callbacks, Tools, Graph</td><td>Agents, Tasks, Crews, and Flows</td><td>Gateway, Channels, Skills/Plugins</td></tr>
+                                <tr><td>Setup surface</td><td class="oneringai-col"><code>Agent.create()</code> for native Agents; <code>AgentRuntime</code> for complete agent systems</td><td>Models, agents, middleware, tools, and LangGraph primitives</td><td>Role/goal/backstory agents, tasks, crews, and flows</td><td>Install, configure channels, and run</td></tr>
+                                <tr><td>Complete-agent runtime</td><td class="oneringai-col">Immutable specs, sessions, live event journal, capability preflight, explicit policy, workspaces, cancellation, and normalized results for native OneRingAI and Codex SDK drivers</td><td>LangGraph runtime and deployment surfaces</td><td>Crew and Flow execution</td><td>Product-owned agent runtime</td></tr>
+                                <tr><td>Runtime</td><td class="oneringai-col">Node.js 22.13+ or 24+, ESM and CJS builds</td><td>Node.js 20+, Cloudflare Workers, Vercel Edge, Deno, Bun</td><td>Python 3.10&ndash;3.13</td><td>Node.js 22+</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -153,7 +154,7 @@
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
                             <tbody>
                                 <tr><td>Vendors</td><td class="oneringai-col">12 native (OpenAI, Anthropic, Google, Vertex, Groq, Together, Perplexity, Grok, DeepSeek, Mistral, Ollama, Custom)</td><td>36+ via dedicated @langchain/* packages</td><td>6 native + LiteLLM fallback for 20+</td><td>30+ via extensions</td></tr>
-                                <tr><td>Model registry</td><td class="oneringai-col">Schema v2: 88 text/realtime records with lifecycle, aliases, snapshots, endpoints, replacements, official sources, pricing, and capabilities</td><td>No centralized registry</td><td>100+ models mapped for context windows</td><td>No registry</td></tr>
+                                <tr><td>Model registry</td><td class="oneringai-col">Schema v2: 95 text/realtime records with lifecycle, aliases, snapshots, endpoints, replacements, official sources, pricing, and capabilities</td><td>No centralized registry</td><td>100+ models mapped for context windows</td><td>No registry</td></tr>
                                 <tr><td>Cost calculation</td><td class="oneringai-col">calculateCost(model, in, out) &rarr; exact USD</td><td>Third-party (LangSmith)</td><td>No built-in</td><td>No built-in</td></tr>
                                 <tr><td>Multi-key per vendor</td><td class="oneringai-col">Named connectors: openai-main, openai-backup</td><td>Not native</td><td>Not native</td><td>Auth profile rotation with failover</td></tr>
                                 <tr><td>Vendor switching</td><td class="oneringai-col">Change <code>connector</code> and <code>model</code>; prompts, tools, memory, and agent logic stay unchanged</td><td>Change model integration and provider-specific config</td><td>Change LLM/model config</td><td>Change extension config</td></tr>
@@ -202,7 +203,7 @@
                                 <tr><td>Rate limiting</td><td class="oneringai-col">Per-tool, per-user, per-session limits</td><td>Custom middleware; built-in model/tool call-count limits</td><td>Host/application concern</td><td>Host/application concern</td></tr>
                                 <tr><td>Circuit breakers</td><td class="oneringai-col">Per-tool + per-provider (configurable thresholds)</td><td>None</td><td>None</td><td>None</td></tr>
                                 <tr><td>Human-in-the-loop</td><td class="oneringai-col">Approval callbacks with session caching</td><td>interrupt() in LangGraph</td><td>@human_feedback decorator in Flow</td><td>Exec approval requests</td></tr>
-                                <tr><td>Sandboxing</td><td class="oneringai-col">Not built-in</td><td>Deprecated &mdash; external containers</td><td>Not built-in</td><td>Docker-based sandbox</td></tr>
+                                <tr><td>Sandboxing</td><td class="oneringai-col">Core Agent execution is host-defined; Agent Runtime policies gate workspace, commands, network, and provider search, while the Codex SDK driver maps supported native sandbox controls</td><td>Deprecated &mdash; external containers</td><td>Not built-in</td><td>Docker-based sandbox</td></tr>
                                 <tr><td>Audit trail</td><td class="oneringai-col">Event-based: permission:allow, permission:deny, permission:audit</td><td>LangSmith tracing or custom logging middleware</td><td>Event listeners in OSS; managed traces in CrewAI Enterprise</td><td>Mutation tracking and approval events</td></tr>
                             </tbody>
                         </table>
@@ -362,7 +363,7 @@
                                 <tr><td>Image generation</td><td class="oneringai-col">Built-in (GPT Image 2, Gemini 3.1 native generation/editing with normalized sizes and multi-image requests, Imagen, Grok Imagine)</td><td>Via community packages</td><td>DALL-E tool via crewai-tools</td><td>Via skills/extensions</td></tr>
                                 <tr><td>Video generation</td><td class="oneringai-col">Built-in (Sora 2 with lifecycle metadata, Veo/Omni, Grok Imagine Video 1.5)</td><td>Not native</td><td>Not supported</td><td>Not built-in</td></tr>
                                 <tr><td>Voice / TTS / STT</td><td class="oneringai-col">Strict 24 kHz OpenAI Realtime and typed 8–48 kHz xAI Voice Agent sessions, plus OpenAI/Google/xAI TTS and STT with response-accurate codecs, raw telephony audio, Gemini timestamps, and multichannel xAI streaming</td><td>Community packages</td><td>Not supported</td><td>Via extensions</td></tr>
-                                <tr><td>Model registries</td><td class="oneringai-col">88 text/realtime, 19 image, 9 video, 7 TTS, 11 STT, and 12 embedding records with schema-v2 metadata</td><td>No registries</td><td>No registries</td><td>No registries</td></tr>
+                                <tr><td>Model registries</td><td class="oneringai-col">95 text/realtime, 20 image, 10 video, 7 TTS, 14 STT, and 15 embedding records with schema-v2 metadata</td><td>No registries</td><td>No registries</td><td>No registries</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -394,7 +395,7 @@
                     <!-- 10. Session & Storage -->
                     <!-- ============================== -->
                     <div class="section-divider" id="s10"></div>
-                    <h3 class="h4 lg:h3 mb-3">10. Session Persistence &amp; Storage</h3>
+                    <h3 class="h4 lg:h3 mb-3">10. Agent Runtime, Sessions &amp; Storage</h3>
                     <div class="table-responsive">
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Feature</th><th>OneRingAI</th><th>LangChain / LangGraph</th><th>CrewAI</th><th>OpenClaw</th></tr></thead>
@@ -404,6 +405,9 @@
                                 <tr><td>Storage backends</td><td class="oneringai-col">StorageRegistry: file, in-memory, pluggable custom (15 implementations). Lazy instantiation, factory pattern.</td><td>Postgres, SQLite, Redis, in-memory</td><td>SQLite (built-in), custom</td><td>Multiple backends</td></tr>
                                 <tr><td>Multi-tenant storage</td><td class="oneringai-col">StorageContext (userId, tenantId, orgId) with per-agent/per-user factories</td><td>Namespace-based Store</td><td>Scoped paths</td><td>Single-user</td></tr>
                                 <tr><td>Agent definitions</td><td class="oneringai-col">Agent.saveDefinition() / Agent.fromStorage()</td><td>Not native</td><td>YAML-based config (@crew, @agent, @task decorators)</td><td>Not applicable</td></tr>
+                                <tr><td>Agent Runtime sessions</td><td class="oneringai-col">Immutable runtime specs open native-driver sessions; every run exposes bounded live/replay events, cancellation, and one normalized result</td><td>Graph threads, checkpoints, and deployment runtime</td><td>Crew and Flow execution state</td><td>Product-managed sessions</td></tr>
+                                <tr><td>Portable native Agents</td><td class="oneringai-col">Protocol-v2 data-only packages, trusted-host hydration, local/remote tool placement, implementation fingerprints, and host-owned permissions</td><td>Host/application-defined serialization and remote execution</td><td>Host/application-defined</td><td>Not an SDK portability surface</td></tr>
+                                <tr><td>Provider-session rollover</td><td class="oneringai-col"><code>agent.rolloverContext()</code> creates a continuity brief while preserving recent turns, tool pairs, plugin state, persistence, and the append-only journal</td><td>Checkpoint and summarization primitives</td><td>Memory/context summarization</td><td>Built-in compaction</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -421,7 +425,7 @@
                                 <tr><td>Multi-tenant</td><td class="oneringai-col">userId scoping, connector allowlist, OAuth token isolation, StorageContext</td><td>Namespace-based primitives; application isolation is host-defined</td><td>Team/RBAC controls in CrewAI Enterprise; application isolation is host-defined in OSS</td><td>Designed around a single-user trust boundary</td></tr>
                                 <tr><td>Observability</td><td class="oneringai-col">Logger + Metrics + EventEmitter on all core classes &mdash; no SaaS required</td><td>LangSmith tracing has a free developer allocation and paid higher-volume tiers</td><td>Event listeners in OSS; managed tracing in CrewAI Enterprise</td><td>Event bus</td></tr>
                                 <tr><td>API stability</td><td class="oneringai-col">Semantic versioning, TypeScript strict mode</td><td>Frequent breaking changes</td><td>Memory system rewritten; some API churn</td><td>CalVer (daily releases)</td></tr>
-                                <tr><td>Tests</td><td class="oneringai-col">6,381 unit tests across 284 files, plus 21 authenticated live API checks</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
+                                <tr><td>Tests</td><td class="oneringai-col">6,500+ unit tests across 300+ files, plus authenticated live API checks</td><td>Vitest matchers (recently added)</td><td>Comprehensive pytest suite</td><td>Community testing</td></tr>
                                 <tr><td>Lifecycle hooks</td><td class="oneringai-col">turn:start, tool:executed, iteration:complete, beforeCompaction, onError</td><td>Callbacks (complex middleware)</td><td>@before_llm_call, @after_llm_call, @before_tool_call, @after_tool_call</td><td>Plugin hooks</td></tr>
                             </tbody>
                         </table>
@@ -455,13 +459,14 @@
                         <table class="table table-bordered comparison-table">
                             <thead><tr><th>Dimension</th><th>OneRingAI Advantage</th><th>vs LangChain</th><th>vs CrewAI</th><th>vs OpenClaw</th></tr></thead>
                             <tbody>
+                                <tr><td>Runtime</td><td class="oneringai-col">One observable lifecycle for complete native OneRingAI and Codex SDK agent systems</td><td>LangGraph runtime and deployment surfaces</td><td>Crew and Flow execution</td><td>Product-owned runtime</td></tr>
                                 <tr><td>Auth</td><td class="oneringai-col">Connector-first architecture with built-in multi-service OAuth 2.0</td><td>Credentials per model/tool integration</td><td>Credentials per model/tool integration</td><td>Auth profiles per extension</td></tr>
                                 <tr><td>Security</td><td class="oneringai-col">3-tier permission system with 8 policy types</td><td>Guardrails, middleware, and HITL; no equivalent permission manager</td><td>Guardrails and human feedback; managed RBAC in Enterprise</td><td>Tool policy, sandbox, and exec approvals</td></tr>
                                 <tr><td>Resilience</td><td class="oneringai-col">Built-in per-tool circuit breakers + rate limiting</td><td>Retries/fallback middleware; no equivalent per-tool circuit breaker</td><td>Retries and callbacks; no equivalent per-tool circuit breaker</td><td>Provider failover and execution policy</td></tr>
                                 <tr><td>Context</td><td class="oneringai-col">Plugin-first context, pluggable compaction, unified store tools, per-plugin budgets, and a scoped entity/fact memory graph</td><td>Split memory systems, no plugin architecture</td><td>Good unified Memory but no plugin system or compaction control</td><td>Not developer-accessible</td></tr>
                                 <tr><td>Orchestration</td><td class="oneringai-col">Built-in orchestrator with 3 routing modes, 5-phase planning, interactive delegation with 3 monitoring modes, SharedWorkspace with auto-deltas</td><td>LangGraph is powerful but requires building from primitives</td><td>Crew/Flow is simpler but less nuanced</td><td>Flat subagent tree</td></tr>
                                 <tr><td>Multi-modal</td><td class="oneringai-col">Single library: text + image + video + embeddings + TTS + STT + realtime voice</td><td>Requires community packages</td><td>Minimal support</td><td>Via extensions only</td></tr>
-                                <tr><td>Desktop</td><td class="oneringai-col">Built-in computer use (11 tools)</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
+                                <tr><td>Desktop</td><td class="oneringai-col">Portable native-Agent packages, trusted-host hydration, local/remote tools, browser-safe Realtime peer, and 11 computer-use tools</td><td>Not built-in</td><td>Not built-in</td><td>Not built-in</td></tr>
                                 <tr><td>TypeScript</td><td class="oneringai-col">Full strict mode type safety</td><td>TS but heavy abstraction layers</td><td>Python-only</td><td>TS but not a developer SDK</td></tr>
                                 <tr><td>Enterprise</td><td class="oneringai-col">Multi-tenant primitives, permissions, hooks &mdash; built into the library, no SaaS required</td><td>LangSmith offers a free developer trace allocation; paid tiers add scale and team features</td><td>Managed deployment, observability, and RBAC are available in CrewAI Enterprise</td><td>Self-hosted and designed around a single-user trust boundary</td></tr>
                             </tbody>
@@ -470,11 +475,11 @@
 
                     <!-- Closing -->
                     <div class="why-callout mt-4 mb-6">
-                        <p class="fs-6 mb-0">OneRingAI is a stable, connector-first TypeScript foundation for production agents: current vendor APIs, lifecycle-aware model registries, auth, security, resilience, multimodal inference, realtime voice, orchestration, tools, and context management in one package. No paid SaaS required.</p>
+                        <p class="fs-6 mb-0">OneRingAI is a stable, connector-first TypeScript foundation for production agents, plus an optional observable runtime for complete agent systems: current vendor APIs, lifecycle-aware registries, portable execution, Agent-aware Realtime, auth, security, resilience, orchestration, tools, and context management in one package.</p>
                     </div>
 
                     <div class="note-callout mb-4" id="sources">
-                        <p class="fs-7 mb-1"><strong>Sources and scope &mdash; last checked 9 August 2026.</strong> OneRingAI facts are based on the current source and release documentation. Competitor capabilities were checked against primary documentation:</p>
+                        <p class="fs-7 mb-1"><strong>Sources and scope.</strong> OneRingAI facts updated from release 1.1.3 source and documentation on 30 August 2026. Competitor capabilities were last checked against primary documentation on 9 August 2026:</p>
                         <p class="fs-7 mb-0"><a href="https://docs.langchain.com/oss/javascript/langchain/models">LangChain models</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/middleware/overview">middleware</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/guardrails">guardrails</a>, and <a href="https://docs.langchain.com/langsmith/billing">LangSmith billing</a>; <a href="https://docs.crewai.com/">CrewAI OSS documentation</a> and <a href="https://docs.crewai.com/enterprise/introduction">CrewAI Enterprise</a>; <a href="https://docs.openclaw.ai/tools">OpenClaw tools</a> and <a href="https://docs.openclaw.ai/tools/exec-approvals">exec approvals</a>. Counts, prices, and managed-product limits change frequently; verify them before quoting.</p>
                     </div>
 

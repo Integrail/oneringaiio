@@ -13,17 +13,17 @@
         gtag('js', new Date());
         gtag('config', 'G-0DH6CTK91N');
     </script>
-    <title>OneRingAI — Unified TypeScript AI Agents, Realtime Voice &amp; Media</title>
-    <meta name="description" content="OneRingAI is an open-source TypeScript library for multi-vendor AI agents, realtime voice, text, images, video, embeddings, tools, memory, and 50 connector templates.">
-    <meta name="keywords" content="oneringai, ai agents, typescript, realtime voice, multimodal ai, multi-vendor llm, openai realtime, agentic ai, open source, mcp, tool use">
+    <title>OneRingAI — TypeScript AI Agents, Agent Runtime &amp; Realtime Voice</title>
+    <meta name="description" content="OneRingAI is an open-source TypeScript library for connector-first AI agents, complete agent runtimes, distributed execution, realtime voice, multimodal APIs, tools, and memory.">
+    <meta name="keywords" content="oneringai, ai agents, agent runtime, typescript, distributed agents, realtime voice, multimodal ai, multi-vendor llm, codex sdk, open source, mcp, tool use">
     <link rel="canonical" href="https://oneringai.io">
     <meta name="theme-color" content="#178d72">
 
     <!-- Open Graph Tags -->
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="OneRingAI — Unified TypeScript AI Agents, Realtime Voice &amp; Media" />
-    <meta property="og:description" content="A stable connector-first API for current OpenAI, Anthropic, Google, and xAI text, image, video, embedding, speech, and realtime APIs." />
+    <meta property="og:title" content="OneRingAI — TypeScript AI Agents, Agent Runtime &amp; Realtime Voice" />
+    <meta property="og:description" content="Connector-first agents plus one observable runtime for complete OneRingAI and Codex SDK agent systems, distributed execution, realtime voice, and multimodal APIs." />
     <meta property="og:url" content="https://oneringai.io" />
     <meta property="og:site_name" content="OneRingAI" />
     <meta property="og:image" content="https://oneringai.io/assets/images/common/seo-image.png" />
@@ -33,11 +33,9 @@
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="OneRingAI — Unified TypeScript AI Agents, Realtime Voice &amp; Media">
-    <meta name="twitter:description" content="A stable connector-first API for current OpenAI, Anthropic, Google, and xAI text, image, video, embedding, speech, and realtime APIs.">
+    <meta name="twitter:title" content="OneRingAI — TypeScript AI Agents, Agent Runtime &amp; Realtime Voice">
+    <meta name="twitter:description" content="Connector-first agents plus one observable runtime for complete OneRingAI and Codex SDK agent systems, distributed execution, realtime voice, and multimodal APIs.">
     <meta name="twitter:image" content="https://oneringai.io/assets/images/common/seo-image.png">
-
-    <link rel="canonical" href="https://oneringai.io" />
 
     <!-- preload head styles -->
     <link rel="preload" href="assets/css/fonts.css" as="style">
@@ -121,6 +119,13 @@
         .memory-map svg .memory-map-type { fill: #84a79b !important; font-size: 10px; letter-spacing: 1.2px; }
         .memory-map svg .memory-map-edge { fill: #67e8bb !important; font-size: 10px; }
         .memory-query { background: rgba(103, 232, 187, 0.08); border: 1px solid rgba(103, 232, 187, 0.14); color: #bfd8cf; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .runtime-showcase { background: radial-gradient(circle at 15% 10%, rgba(111, 189, 255, 0.16), transparent 34%), linear-gradient(135deg, #111b2d 0%, #090e18 100%); color: #eef5ff; border: 1px solid rgba(111, 189, 255, 0.22); box-shadow: 0 30px 80px rgba(5, 12, 25, 0.3); }
+        .runtime-feature { background: rgba(255, 255, 255, 0.055); border: 1px solid rgba(111, 189, 255, 0.14); }
+        .runtime-console { background: rgba(3, 8, 17, 0.82); border: 1px solid rgba(111, 189, 255, 0.24); box-shadow: 0 24px 64px rgba(2, 7, 16, 0.32); }
+        .runtime-console pre { color: #cbd9ed; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: clamp(0.72rem, 1.45vw, 0.9rem); line-height: 1.65; white-space: pre; overflow-x: auto; margin: 0; }
+        .runtime-console .runtime-keyword { color: #73daca; }
+        .runtime-console .runtime-string { color: #e0af68; }
+        .runtime-step { background: rgba(111, 189, 255, 0.08); border: 1px solid rgba(111, 189, 255, 0.16); color: #c7d7ef; }
     </style>
 </head>
 
@@ -197,8 +202,8 @@
 
             <header class="uc-offcanvas-header hstack justify-between items-center pb-2 bg-white dark:bg-gray-900">
                 <div class="uc-logo">
-                    <a href="index.html" class="h5 text-none text-gray-900 dark:text-white">
-                        <img class="w-32px" src="assets/images/common/logo-correct.png" alt="OneRingAI">
+                    <a href="index.html" class="panel h5 text-none text-gray-900 dark:text-white" style="width: 150px;">
+                        <img src="assets/images/common/logo-correct.png" alt="OneRingAI">
                     </a>
                 </div>
                 <button class="uc-offcanvas-close rtl:end-auto rtl:start-0 m-1 mt-2 icon-3 btn border-0 dark:text-white dark:text-opacity-50 hover:text-primary hover:rotate-90 duration-150 transition-all" type="button">
@@ -207,13 +212,26 @@
             </header>
 
             <div class="panel">
-                <form id="search-panel" class="form-icon-group vstack gap-1 mb-2" data-uc-sticky="">
+                <ul class="nav-y gap-1 fw-medium fs-6 mt-3" data-uc-nav>
+                    <li><a href="#runtime">Agent Runtime</a></li>
+                    <li><a href="#release">What&rsquo;s new in 1.1</a></li>
+                    <li><a href="#memory">Memory</a></li>
+                    <li><a href="#amos">AMOS</a></li>
+                    <li><a href="#comparison">Why OneRingAI?</a></li>
+                    <li><a href="main/comparison.html">Full comparison</a></li>
+                    <li class="hr opacity-10 my-1"></li>
+                    <li><a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md">User Guide</a></li>
+                    <li><a href="https://github.com/aantich/oneringai/blob/main/examples/README.md">Examples</a></li>
+                    <li><a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#113--2026-08-30">Release notes</a></li>
+                    <li><a href="https://github.com/aantich/oneringai/">GitHub</a></li>
+                </ul>
+                <form id="search-panel" class="d-none form-icon-group vstack gap-1 mb-2" data-uc-sticky="">
                     <input type="email" class="form-control form-control-sm fs-7 rounded-default" placeholder="Search..">
                     <span class="form-icon text-gray">
                         <i class="unicon-search icon-1"></i>
                     </span>
                 </form>
-                <ul class="nav-y gap-narrow fw-medium fs-6" data-uc-nav>
+                <ul class="d-none nav-y gap-narrow fw-medium fs-6" data-uc-nav>
                     <li><a href="main/page-features.html">Features</a></li>
                     <li><a href="main/page-pricing.html">Pricing</a></li>
                     <li><a href="main/page-about.html">About</a></li>
@@ -286,7 +304,7 @@
                     <li><a href="main/sign-in.html">Log in</a></li>
                     <li><a href="https://themeforest.net/item/lexend-software-saas-startup-html5-template/51596504">Buy Template</a></li>
                 </ul>
-                <ul class="social-icons nav-x mt-4">
+                <ul class="d-none social-icons nav-x mt-4">
                     <li>
                         <a href="#"><i class="unicon-logo-medium icon-2"></i></a>
                         <a href="#"><i class="unicon-logo-x-filled icon-2"></i></a>
@@ -322,7 +340,7 @@
     <!-- Header start -->
     <div class="uc-banner-top py-1 p-2 m-0 hide-on-sticky text-center bg-gradient-to-r from-primary dark:from-tertiary-200 to-primary-700 dark:to-tertiary text-white dark:text-dark" data-uc-alert="">
         <a href="#" class="uc-alert-close top-0 end-0" style="margin: 14px;" data-uc-close></a>
-        <p><strong>OneRingAI is production-ready.</strong> Registry v2, current model APIs, realtime voice, and a stable connector-first foundation. <a href="#release" class="uc-link text-tertiary dark:text-primary border-bottom">See what's included</a></p>
+        <p><strong>OneRingAI 1.1.3 is out.</strong> Run complete agent systems, move native Agents across trusted hosts, and keep long-lived Realtime sessions continuous. <a href="#runtime" class="uc-link text-tertiary dark:text-primary border-bottom">Explore the Agent Runtime</a></p>
     </div>
     <header class="uc-header header-seven uc-navbar-sticky-wrap z-999 " data-uc-sticky="start: 100vh; show-on-up: true; animation: uc-animation-slide-top; sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">
         <nav class="uc-navbar-container uc-navbar-float ft-tertiary z-1" data-anime="translateY: [-40, 0]; opacity: [0, 1]; easing: easeOutExpo; duration: 750; delay: 0;">
@@ -337,8 +355,9 @@
                                 </a>
                             </div>
                             <ul class="uc-navbar-nav gap-3 d-none lg:d-flex ltr:ms-2 rtl:me-2">
+                                <li><a href="#runtime"><span>Agent Runtime</span></a></li>
                                 <li><a href="#comparison"><i class="fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>Why OneRingAI?</span></a></li>
-                                <li><a href="main/comparison.html"><i class="fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>Full Comparison</span></a></li>
+                                <li class="d-none xl:d-inline-flex"><a href="main/comparison.html"><i class="fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>Full Comparison</span></a></li>
                                 <li><a href="#memory"><span>Memory</span></a></li>
                                 <li><a href="#amos"><span>AMOS</span></a></li>
                                 <li><a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md"><i class="icon unicon-cube fw-bold ltr:me-narrow rtl:ms-narrow text-primary dark:text-tertiary"></i><span>User Guide</span></a></li>
@@ -347,8 +366,9 @@
                         </div>
                         <div class="uc-navbar-right">
                             <ul class="nav-x d-none lg:d-flex">
-                                <li class="d-none xl:d-inline-flex"><a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#100--2026-08-08">Release notes</a></li>
+                                <li class="d-none xl:d-inline-flex"><a href="https://github.com/aantich/oneringai/blob/main/CHANGELOG.md#113--2026-08-30">v1.1.3 notes</a></li>
                             </ul>
+                            <a class="d-block lg:d-none" href="#uc-menu-panel" data-uc-navbar-toggle-icon data-uc-toggle aria-label="Open navigation menu"></a>
                         </div>
                     </div>
                 </div>
@@ -383,20 +403,21 @@
                         <div class="row child-cols-12 justify-center items-center g-8">
                             <div class="lg:col-8">
                                 <div class="panel vstack items-center gap-2 px-2 text-center" data-anime="targets: >*; translateY: [48, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(100, {start: 200});">
-                                    <span class="fs-7 fw-bold py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Stable release &bull; Node.js 22+</span>
+                                    <span class="fs-7 fw-bold py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">v1.1.3 &bull; Node.js 22.13+ or 24+</span>
                                     <h1 class="hero-title h3 sm:h2 md:h1 lg:display-6 lh-lg mb-1 xl:mb-2 mt-2">
                                         <span class="hero-title-line">One TypeScript Library</span>
                                         <span class="hero-title-line">for AI Agents,</span>
                                         <span class="hero-title-rotator">
                                             <span class="px-1 bg-primary text-tertiary dark:bg-tertiary dark:text-primary" data-uc-typed="typeSpeed: 80; backSpeed: 50; backDelay: 1500; loop: true;">
+                                                <span>Complete Agent Runtimes</span>
                                                 <span>Realtime Voice</span>
                                                 <span>Every Modality</span>
-                                                <span>Production Workflows</span>
+                                                <span>Distributed Execution</span>
                                             </span>
                                         </span>
                                     </h1>
 
-                                    <p class="fs-6 xl:fs-3 xl:px-6">A stable connector-first API for current OpenAI, Anthropic, Google, and xAI models across text, images, video, embeddings, speech, and live voice.</p>
+                                    <p class="fs-6 xl:fs-3 xl:px-6">Connector-first agents plus one observable runtime for complete OneRingAI and Codex SDK agent systems, distributed execution, realtime voice, and every model modality.</p>
 
                                     <code style="font-style: normal; font-size: clamp(0.8rem, 3.6vw, 1.25rem); color: rgba(255,255,255,0.7); background: transparent; white-space: nowrap; max-width: 100%; display: block;">
                                             npm i @everworker/oneringai
@@ -419,7 +440,7 @@
                                                         <img class="w-24px dark:d-none" src="assets/images/custom-icons/icon-08.svg" alt="icon">
                                                         <img class="w-24px d-none dark:d-block" src="assets/images/custom-icons/dark-icon-08.svg" alt="icon">
                                                     </span>
-                                                    <span class="fs-7 fw-medium mb-narrow text-inherit">Connector-first agents</span>
+                                                    <span class="fs-7 fw-medium mb-narrow text-inherit">Observable Agent Runtime</span>
                                                 </div>
                                             </div>
                                             <div>
@@ -428,7 +449,7 @@
                                                         <img class="w-24px dark:d-none" src="assets/images/custom-icons/icon-07.svg" alt="icon">
                                                         <img class="w-24px d-none dark:d-block" src="assets/images/custom-icons/dark-icon-07.svg" alt="icon">
                                                     </span>
-                                                    <span class="fs-7 fw-medium mb-narrow text-inherit">Registry v2 model intelligence</span>
+                                                    <span class="fs-7 fw-medium mb-narrow text-inherit">Connector-first native Agents</span>
                                                 </div>
                                             </div>
                                             <div>
@@ -437,7 +458,7 @@
                                                         <img class="w-24px dark:d-none" src="assets/images/custom-icons/icon-04.svg" alt="icon">
                                                         <img class="w-24px d-none dark:d-block" src="assets/images/custom-icons/dark-icon-04.svg" alt="icon">
                                                     </span>
-                                                    <span class="fs-7 fw-medium mb-narrow text-inherit">Realtime voice and media</span>
+                                                    <span class="fs-7 fw-medium mb-narrow text-inherit">Portable, trusted execution</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -447,10 +468,10 @@
                             <div class="panel col-12 max-w-1000px mx-auto mt-2" data-anime="scale: [1.05, 1]; opacity: [0, 1]; easing: easeOutCubic; duration: 750; delay: 500;">
                                 <div class="rounded lg:rounded-1-5 xl:rounded-2 border border-dark contrast-shadow-lg overflow-hidden bg-white dark:bg-gray-900 p-3 sm:p-4 lg:p-5">
                                     <div class="row child-cols-12 sm:child-cols-6 lg:child-cols-3 g-3 text-start">
-                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">MODELS</span><h2 class="h5 mt-1 mb-1">Current vendor APIs</h2><p class="fs-7 opacity-70 m-0">GPT-5.6, Claude 5, Gemini 3.6, Grok 4.5, and lifecycle-aware aliases.</p></div></div>
+                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">RUNTIME</span><h2 class="h5 mt-1 mb-1">Complete agent systems</h2><p class="fs-7 opacity-70 m-0">One API for native OneRingAI and Codex SDK sessions, runs, live events, policy, workspaces, and normalized results.</p></div></div>
                                         <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">REALTIME</span><h2 class="h5 mt-1 mb-1">Live voice agents</h2><p class="fs-7 opacity-70 m-0">OpenAI Realtime and xAI Voice Agent with provider-specific session types, WebSocket, WebRTC credentials, tools, correct VAD, and SIP control.</p></div></div>
-                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">MEDIA</span><h2 class="h5 mt-1 mb-1">Images, video, and audio</h2><p class="fs-7 opacity-70 m-0">GPT Image 2, Gemini native image, Veo/Omni, Grok Imagine, raw telephony STT, TTS, and multimodal embeddings.</p></div></div>
-                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">PRODUCTION</span><h2 class="h5 mt-1 mb-1">Agents that hold up</h2><p class="fs-7 opacity-70 m-0">Connectors, permissions, memory, tools, orchestration, resilience, storage, and MCP in one package.</p></div></div>
+                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">DISTRIBUTED</span><h2 class="h5 mt-1 mb-1">Portable native Agents</h2><p class="fs-7 opacity-70 m-0">Data-only packages, trusted-host hydration, local and remote tools, implementation fingerprints, and host-owned authority.</p></div></div>
+                                        <div><div class="p-3 rounded border h-100"><span class="fs-7 fw-bold text-primary dark:text-tertiary">MODELS</span><h2 class="h5 mt-1 mb-1">Current vendor APIs</h2><p class="fs-7 opacity-70 m-0">GPT-5.6, Claude 5, Gemini 3.7, Grok 4.6, DeepSeek V4, and lifecycle-aware aliases.</p></div></div>
                                     </div>
                                 </div>
                             </div>
@@ -467,15 +488,17 @@
                 <div class="container sm:max-w-lg xl:max-w-xl">
                     <div class="section-inner panel">
                         <div class="panel vstack items-center gap-2 xl:gap-3 mb-4 sm:mb-6 mx-auto text-center" data-anime="onview: -200; targets: >*; translateY: [48, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(100, {start: 200});">
-                            <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Production foundation</span>
-                            <h2 class="h3 lg:h2 m-0">What's inside <span class="px-1 bg-tertiary text-primary">OneRingAI</span></h2>
-                            <p class="fs-6 xl:fs-3 xl:px-8">A stable public foundation and a complete refresh of the first-party OpenAI, Anthropic, Google, and xAI APIs.</p>
+                            <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Releases 1.1.0&ndash;1.1.3</span>
+                            <h2 class="h3 lg:h2 m-0">What&rsquo;s new in <span class="px-1 bg-tertiary text-primary">OneRingAI 1.1</span></h2>
+                            <p class="fs-6 xl:fs-3 xl:px-8">A vendor-neutral execution layer, portable native Agents, Agent-aware Realtime, and safer long-lived sessions&mdash;without changing the connector-first Agent path.</p>
                         </div>
                         <div class="row child-cols-12 md:child-cols-6 lg:child-cols-3 g-3 lg:g-4 col-match">
-                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Registry schema v2</h3><p class="fs-6 opacity-70 mb-0">88 text and realtime records plus dedicated image, video, TTS, STT, and embedding registries. Every registry understands lifecycle, aliases, snapshots, endpoints, replacements, preferred choices, official sources, and richer pricing.</p></div></div>
-                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Realtime voice, fully supported</h3><p class="fs-6 opacity-70 mb-0">Build OpenAI Realtime and xAI Voice Agent experiences with typed events, tools, provider-correct VAD, credentials, transcription, translation, SIP, and resumption. OpenAI PCM is fixed at 24 kHz; xAI's typed session supports 8 to 48 kHz.</p></div></div>
-                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Current multimodal APIs</h3><p class="fs-6 opacity-70 mb-0">Use current text, image, video, speech, and embedding models—including status-safe Gemini Interactions streams, strict named tools, bounded external media, content-aware MIME detection, response-accurate xAI TTS formats, Omni video, and multichannel STT.</p></div></div>
-                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Deliberate major-version contract</h3><p class="fs-6 opacity-70 mb-0">Node.js 22+, current vendor SDKs, nullable unknown token limits, lifecycle-aware availability, alias lookup helpers, stored Google Interactions, and model-gated GPT-5.6 explicit cache breakpoints.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Vendor-neutral Agent Runtime</h3><p class="fs-6 opacity-70 mb-0">Run native OneRingAI and Codex SDK agent systems through immutable specs, sessions, observable runs, capability preflight, explicit policy, workspaces, cancellation, and normalized results.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Portable distributed Agents</h3><p class="fs-6 opacity-70 mb-0">Export a resolved native Agent as data, hydrate it on a trusted desktop host, place tools locally or remotely, and verify executable compatibility with protocol-v2 fingerprints.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Agent-aware Realtime</h3><p class="fs-6 opacity-70 mb-0"><code>OpenAIRealtimeAgentSession</code> refreshes managed context per turn and executes local tools through the Agent&rsquo;s normal hooks, approval, permission, timeout, event, and metrics path.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Long-lived session rollover</h3><p class="fs-6 opacity-70 mb-0"><code>agent.rolloverContext()</code> creates a continuity brief at provider-session boundaries while preserving recent turns, complete tool pairs, plugin state, persistence, and the history journal.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Host-owned security</h3><p class="fs-6 opacity-70 mb-0">Portable package data never grants authority. Receiving hosts resolve connectors, identity, permissions, plugins, local implementations, provider policy, and every remote request from trusted state.</p></div></div>
+                            <div><div class="p-3 lg:p-4 border rounded h-100"><h3 class="h5 mb-2">Current models and credentials</h3><p class="fs-6 opacity-70 mb-0">Registry v2 now covers 95 text/realtime models plus dedicated media registries. Runtime-only rotating OpenAI credentials support short-lived host keys across text and media requests.</p></div></div>
                         </div>
                         <div class="vstack md:hstack justify-center gap-2 mt-4 lg:mt-6">
                             <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md" class="btn btn-md btn-primary text-tertiary px-3 lg:px-5 fw-bold">Read the User Guide</a>
@@ -486,6 +509,79 @@
                 </div>
             </div>
         </div>
+
+        <!-- Agent Runtime showcase start -->
+        <div id="runtime" class="main-features section panel overflow-hidden">
+            <div class="section-outer panel py-4 md:py-6 xl:py-9">
+                <div class="container sm:max-w-lg xl:max-w-xl">
+                    <div class="runtime-showcase section-inner panel p-4 md:p-6 xl:p-8 rounded-2">
+                        <div class="row child-cols-12 lg:child-cols-6 items-center g-5 xl:g-8">
+                            <div>
+                                <div class="panel vstack gap-3" data-anime="onview: -150; targets: >*; translateY: [32, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(90);">
+                                    <div><span class="fs-7 fw-bold py-narrow px-2 border rounded-pill" style="color: #91caff;">New execution layer in 1.1</span></div>
+                                    <h2 class="h3 lg:h2 m-0 text-white">Run complete agents through <span class="px-1 bg-tertiary text-primary">one observable runtime</span></h2>
+                                    <p class="fs-6 xl:fs-4 opacity-80 m-0">The Agent Runtime does not replace <code>Agent.create()</code> or rebuild native agent loops. It gives applications one lifecycle for configuring, running, observing, cancelling, and collecting results from complete OneRingAI and Codex SDK agents.</p>
+                                    <div class="row child-cols-12 sm:child-cols-6 g-2 mt-1">
+                                        <div><div class="runtime-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Native loops stay native</strong><span class="fs-7 opacity-70">Drivers adapt complete agent systems while preserving each system&rsquo;s own execution loop and tool semantics.</span></div></div>
+                                        <div><div class="runtime-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Live event journal</strong><span class="fs-7 opacity-70">Observe messages, reasoning, plans, commands, file changes, usage, and terminal state with bounded replay.</span></div></div>
+                                        <div><div class="runtime-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Fail-closed capabilities</strong><span class="fs-7 opacity-70">Model, reasoning, structured output, images, workspace access, and policy are checked before native work starts.</span></div></div>
+                                        <div><div class="runtime-feature p-3 rounded h-100"><strong class="d-block text-white mb-narrow">Portable execution</strong><span class="fs-7 opacity-70">Move native Agents across trusted hosts and bridge browser-safe Realtime media without moving credentials or authority.</span></div></div>
+                                    </div>
+                                    <div class="vstack sm:hstack gap-2 mt-2">
+                                        <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#agent-runtime-preview" class="btn btn-md btn-primary text-tertiary px-3 lg:px-4 fw-bold">Read the Runtime guide</a>
+                                        <a href="https://github.com/aantich/oneringai/blob/main/examples/agent-runtime-local.ts" class="btn btn-md bg-white text-dark px-3 lg:px-4 fw-bold">Run the example</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="runtime-console rounded-1-5 p-3 sm:p-4" data-anime="onview: -150; translateX: [32, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 650; delay: 150;">
+                                    <div class="vstack sm:hstack sm:justify-between gap-1 sm:gap-2 mb-3">
+                                        <span class="fs-7 fw-bold" style="color: #91caff;">ONE OBSERVABLE RUN</span>
+                                        <span class="fs-8 opacity-50">@everworker/oneringai/agent-runtime</span>
+                                    </div>
+                                    <pre><span class="runtime-keyword">const</span> codingAgent = runtime.agent({
+  id: <span class="runtime-string">'coding-agent'</span>,
+  driver: <span class="runtime-string">'openai.codex.sdk'</span>,
+  connector: <span class="runtime-string">'openai-main'</span>,
+  model: <span class="runtime-string">'gpt-5.6-terra'</span>,
+  reasoning: { effort: <span class="runtime-string">'high'</span> },
+});
+
+<span class="runtime-keyword">const</span> session = <span class="runtime-keyword">await</span> codingAgent
+  .openSession({
+  context: { userId },
+  policy,
+  observation: {
+    mode: <span class="runtime-string">'live'</span>,
+    detail: <span class="runtime-string">'reasoning'</span>,
+  },
+});
+
+<span class="runtime-keyword">const</span> run = <span class="runtime-keyword">await</span> session.run(task);
+<span class="runtime-keyword">for await</span> (<span class="runtime-keyword">const</span> event <span class="runtime-keyword">of</span> run.events()) {
+  render(event);
+}
+
+<span class="runtime-keyword">const</span> result = <span class="runtime-keyword">await</span> run.result;</pre>
+                                    <div class="row child-cols-12 sm:child-cols-3 g-1 mt-3 text-center">
+                                        <div><div class="runtime-step rounded p-2 fs-8 h-100">immutable spec</div></div>
+                                        <div><div class="runtime-step rounded p-2 fs-8 h-100">session + run</div></div>
+                                        <div><div class="runtime-step rounded p-2 fs-8 h-100">events + result</div></div>
+                                    </div>
+                                    <div class="hstack flex-wrap gap-1 mt-2 fs-8 opacity-70">
+                                        <span class="border rounded-pill px-1">oneringai.agent</span>
+                                        <span class="border rounded-pill px-1">openai.codex.sdk</span>
+                                        <span class="border rounded-pill px-1">local backend</span>
+                                        <span class="border rounded-pill px-1">capability preflight</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Agent Runtime showcase end -->
 
         <!-- Memory showcase start -->
         <div id="memory" class="main-features section panel overflow-hidden">
@@ -1439,8 +1535,8 @@
                     <div class="section-inner panel">
                         <div class="panel vstack items-center gap-2 xl:gap-3 mb-4 sm:mb-6 lg:mb-8 sm:max-w-600px lg:max-w-700px xl:max-w-800px mx-auto text-center" data-anime="onview: -200; targets: >*; translateY: [48, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(100, {start: 200});">
                             <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">OneRingAI Feature Highlights</span>
-                            <h2 class="h3 lg:h2 m-0">Production AI agents, every vendor and modality</h2>
-                            <p class="fs-6 xl:fs-3 xl:px-8">Node.js 22+, strict TypeScript, connector-first authentication, unified inference APIs, and production agent infrastructure in one package.</p>
+                            <h2 class="h3 lg:h2 m-0">Production AI agents, complete runtimes, every modality</h2>
+                            <p class="fs-6 xl:fs-3 xl:px-8">Node.js 22.13+ or 24+, strict TypeScript, connector-first authentication, unified inference APIs, portable execution, and production agent infrastructure in one package.</p>
                         </div>
                         <div class="features-items row child-cols-12 sm:child-cols-6 lg:child-cols-4 g-4 lg:g-6 col-match" data-anime="onview: -200; targets: >*; translateY: [48, 0]; opacity: [0, 1]; easing: easeOutCubic; duration: 500; delay: anime.stagger(100, {start: 400});">
                             <div class="order-1 lg:order-0">
@@ -1502,8 +1598,8 @@
                                     </div>
                                     <div class="panel">
                                         <div class="vstack gap-1">
-                                            <h3 class="title h6 m-0">Clean Architecture</h3>
-                                            <p class="desc fs-6 opacity-60 dark:opacity-90">The library is built on clean architecture principles, which makes building your own app as easy as configuring your infrastructure layer, and maintainability is a breeze.</p>
+                                            <h3 class="title h6 m-0">Observable Agent Runtime</h3>
+                                            <p class="desc fs-6 opacity-60 dark:opacity-90">Run complete native OneRingAI or Codex SDK agents through shared specs, sessions, live event journals, policy, capability checks, cancellation, and normalized results. <a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#agent-runtime-preview" class="uc-link text-tertiary">Runtime guide</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -1970,7 +2066,7 @@
                         <span class="fs-7 fw-medium py-narrow px-2 border rounded-pill text-primary dark:text-tertiary">Comparison</span>
                         <h2 class="h3 lg:h2 mt-2 mb-1">OneRingAI vs LangChain vs CrewAI vs OpenClaw</h2>
                         <p class="fs-5 opacity-70">Feature Comparison &mdash; reviewed August 2026</p>
-                        <p class="fs-6 mt-2 mx-auto" style="max-width: 800px;">OneRingAI is a unified TypeScript agent library (~109K LOC, 20 deps) that replaces the sprawling ecosystems of LangChain/LangGraph (200K+ LOC, 15+ packages) and the Python-only CrewAI (~100K LOC, 33 deps) &mdash; with a connector-first architecture that treats authentication, security, resilience, and multi-vendor support as first-class primitives rather than afterthoughts.</p>
+                        <p class="fs-6 mt-2 mx-auto" style="max-width: 800px;">OneRingAI is a unified TypeScript agent library (~165K source LOC, 23 direct runtime dependencies) with a connector-first native Agent path and an optional runtime for complete agent systems. Authentication, security, resilience, observability, multimodal inference, and distributed execution are first-class library concerns.</p>
                     </div>
                     <div class="note-callout">
                         <strong>About OpenClaw:</strong> OpenClaw (~355K GitHub stars) is a self-hosted <em>personal AI assistant platform</em> for messaging channels (WhatsApp, Slack, Telegram, etc.), not a developer SDK. It is included here for architectural comparison, but serves a fundamentally different use case.
@@ -2006,7 +2102,7 @@
                                 </tr>
                                 <tr>
                                     <td>LOC / Deps</td>
-                                    <td class="oneringai-col">~109K LOC / 20 deps</td>
+                                    <td class="oneringai-col">~165K source LOC / 23 direct runtime deps</td>
                                     <td>~200K+ LOC / 15+ packages</td>
                                     <td>~100K LOC / 33 deps</td>
                                     <td>~300K+ LOC / extensions</td>
@@ -2020,10 +2116,17 @@
                                 </tr>
                                 <tr>
                                     <td>Setup surface</td>
-                                    <td class="oneringai-col">Single Agent.create() entry point</td>
+                                    <td class="oneringai-col"><code>Agent.create()</code> for native Agents; <code>AgentRuntime</code> for complete agent systems</td>
                                     <td>Models, agents, middleware, tools, and LangGraph primitives</td>
                                     <td>Role/goal/backstory agents, tasks, crews, and flows</td>
                                     <td>Install, configure channels, and run</td>
+                                </tr>
+                                <tr>
+                                    <td>Complete-agent runtime</td>
+                                    <td class="oneringai-col">Vendor-neutral specs, sessions, live event journal, capability preflight, policy, workspaces, cancellation, and normalized results for native OneRingAI and Codex SDK drivers</td>
+                                    <td>LangGraph runtime and deployment surfaces</td>
+                                    <td>Crew and Flow execution</td>
+                                    <td>Product-owned agent runtime</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -2055,7 +2158,7 @@
                                 </tr>
                                 <tr>
                                     <td>Model registry</td>
-                                    <td class="oneringai-col">Registry schema v2: 88 text/realtime records with lifecycle, aliases, endpoints, official sources, pricing, and capability metadata</td>
+                                    <td class="oneringai-col">Registry schema v2: 95 text/realtime records with lifecycle, aliases, endpoints, official sources, pricing, and capability metadata</td>
                                     <td>No centralized registry</td>
                                     <td>100+ models mapped for context windows</td>
                                     <td>No registry</td>
@@ -2419,7 +2522,7 @@
                                 </tr>
                                 <tr>
                                     <td>Model registries</td>
-                                    <td class="oneringai-col">Dedicated registries: 19 image, 9 video, 7 TTS, 11 STT, and 12 embedding records with schema-v2 metadata</td>
+                                    <td class="oneringai-col">Dedicated registries: 20 image, 10 video, 7 TTS, 14 STT, and 15 embedding records with schema-v2 metadata</td>
                                     <td>No registries</td>
                                     <td>No registries</td>
                                     <td>No registries</td>
@@ -2517,7 +2620,7 @@
                                 </tr>
                                 <tr>
                                     <td>Tests</td>
-                                    <td class="oneringai-col">6,381 unit tests across 284 files, plus 21 authenticated live API checks</td>
+                                    <td class="oneringai-col">6,500+ unit tests across 300+ files, plus authenticated live API checks</td>
                                     <td>Vitest matchers (recently added)</td>
                                     <td>Comprehensive pytest suite</td>
                                     <td>Community testing</td>
@@ -2540,6 +2643,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>Runtime</td>
+                                    <td class="oneringai-col">One observable lifecycle for complete native OneRingAI and Codex SDK agent systems</td>
+                                    <td>LangGraph runtime and deployment surfaces</td>
+                                    <td>Crew and Flow execution</td>
+                                    <td>Product-owned runtime</td>
+                                </tr>
                                 <tr>
                                     <td>Auth</td>
                                     <td class="oneringai-col">Connector-first architecture with built-in multi-service OAuth 2.0</td>
@@ -2570,14 +2680,14 @@
                                 </tr>
                                 <tr>
                                     <td>Multi-modal</td>
-                                    <td class="oneringai-col">Single library: text + image + video + TTS + STT</td>
+                                    <td class="oneringai-col">Single library: text + image + video + embeddings + TTS + STT + realtime voice</td>
                                     <td>Requires community packages</td>
                                     <td>Minimal support</td>
                                     <td>Via extensions only</td>
                                 </tr>
                                 <tr>
                                     <td>Desktop</td>
-                                    <td class="oneringai-col">Built-in computer use (11 tools)</td>
+                                    <td class="oneringai-col">Portable native-Agent packages, trusted-host hydration, local/remote tools, browser-safe Realtime peer, and 11 computer-use tools</td>
                                     <td>Not built-in</td>
                                     <td>Not built-in</td>
                                     <td>Not built-in</td>
@@ -2602,11 +2712,11 @@
 
                     <!-- Closing -->
                     <div class="why-callout mt-4 mb-6">
-                        <p class="fs-6 mb-0">OneRingAI is a stable, connector-first TypeScript foundation for production agents: current vendor APIs, lifecycle-aware model registries, auth, security, resilience, multimodal inference, realtime voice, orchestration, tools, and context management in one package. No paid SaaS required.</p>
+                        <p class="fs-6 mb-0">OneRingAI is a stable, connector-first TypeScript foundation for production agents, plus an optional observable runtime for complete agent systems: current vendor APIs, lifecycle-aware registries, portable execution, Agent-aware Realtime, auth, security, resilience, orchestration, tools, and context management in one package.</p>
                     </div>
 
                     <div class="note-callout mb-4" id="comparison-sources">
-                        <p class="fs-7 mb-1"><strong>Sources and scope &mdash; last checked 9 August 2026.</strong> OneRingAI facts are based on the current source and release documentation. Competitor capabilities were checked against primary documentation:</p>
+                        <p class="fs-7 mb-1"><strong>Sources and scope.</strong> OneRingAI facts updated from release 1.1.3 source and documentation on 30 August 2026. Competitor capabilities were last checked against primary documentation on 9 August 2026:</p>
                         <p class="fs-7 mb-0"><a href="https://docs.langchain.com/oss/javascript/langchain/models">LangChain models</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/middleware/overview">middleware</a>, <a href="https://docs.langchain.com/oss/javascript/langchain/guardrails">guardrails</a>, and <a href="https://docs.langchain.com/langsmith/billing">LangSmith billing</a>; <a href="https://docs.crewai.com/">CrewAI OSS documentation</a> and <a href="https://docs.crewai.com/enterprise/introduction">CrewAI Enterprise</a>; <a href="https://docs.openclaw.ai/tools">OpenClaw tools</a> and <a href="https://docs.openclaw.ai/tools/exec-approvals">exec approvals</a>. Counts, prices, and managed-product limits change frequently; verify them before quoting.</p>
                     </div>
 
@@ -2689,6 +2799,7 @@
                         <div class="uc-footer-bottom panel vstack md:hstack gap-2 justify-between items-center text-center pt-4 lg:pt-6 border-top dark:text-white">
                             <p>OneRingAI © 2025-2026, All rights reserved.</p>
                             <ul class="nav-x gap-1">
+                                <li><a href="https://github.com/aantich/oneringai/blob/main/USER_GUIDE.md#agent-runtime-preview">Agent Runtime</a></li>
                                 <li><a href="https://github.com/aantich/oneringai/blob/main/docs/MEMORY_GUIDE.md">Memory</a></li>
                                 <li><a href="https://github.com/aantich/oneringai/blob/main/apps/amos/README.md">AMOS</a></li>
                                 <li><a href="https://github.com/aantich/oneringai/blob/main/examples/README.md">Examples</a></li>
